@@ -4,3 +4,5 @@ const { Router } = require('express')
 router.get('/json', (req, res, next) => {
     return { id: 'hi', nickname: 'bye', code: '#33d543' }
 })
+
+module.exports = router

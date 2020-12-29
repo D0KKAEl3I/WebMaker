@@ -4,3 +4,5 @@ const { Router } = require('express')
 router.post('/login', (req, res, next) => {
     return true;
 })
+
+module.exports = router

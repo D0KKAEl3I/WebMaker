@@ -5,9 +5,9 @@ app.use(express.json())
 const bodyParser = require('body-parser');
 
 //내부 module
-const config = require('../config/index')
-const router = require('../routers')
-const authRouter = require('../routers/auth')
+const config = require('./config/index')
+const router = require('./routers/index')
+const authRouter = require('./routers/auth')
 
 app.use('/', router)
 app.use('/auth', authRouter)
