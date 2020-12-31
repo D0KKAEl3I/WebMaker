@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-
+import Block from '../../components/block'
 
 export default function Index() {
     const [infoList, setInfoList] = useState([])
@@ -11,7 +11,7 @@ export default function Index() {
         axios.get('http://jsonplaceholder.typicode.com/posts').then(r => {
             setInfoList(r.data)
             setLoading(false)
-            // console.log(infoList)
+            console.log(r)
         }).catch(e => {
             console.log('error', e)
             setLoading(false)
@@ -26,16 +26,16 @@ export default function Index() {
         <div>
             {
                 loading ?
-
                     'No'
                     :
-                    <div>
-                        {
-                            infoList.map(item => {
-                                return <h3> {item.id}</h3>
-                            })
-                        }
-                    </div>
+                    infoList.map(item => {
+                        return (
+                            <Block title={item.title}>
+                                {item.body}
+                            </Block>
+                        )
+                    })
+
             }
         </div >
     )
