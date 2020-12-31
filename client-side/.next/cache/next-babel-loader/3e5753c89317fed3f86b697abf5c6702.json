@@ -1,0 +1,1 @@
+{"ast":null,"code":"import Index from \"../src/Index\";\nexport default Index;","map":{"version":3,"sources":["C:/Users/S/Desktop/끼요옷/포폴관리앱/client-side/pages/index.js"],"names":["Index"],"mappings":"AAAA,OAAOA,KAAP,MAAkB,cAAlB;AAEA,eAAeA,KAAf","sourcesContent":["import Index from \"../src/Index\"\n\nexport default Index;"]},"metadata":{},"sourceType":"module"}
