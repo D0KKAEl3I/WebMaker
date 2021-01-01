@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import Block from '../../components/block'
+import SubmitButton from '../../components/SubmitButton'
+
 
 export default function Index() {
     const [infoList, setInfoList] = useState([])
@@ -26,16 +27,9 @@ export default function Index() {
         <div>
             {
                 loading ?
-                    'No'
+                    "loooooooooooooooooooooooooooooooooooooooooooooooading"
                     :
-                    infoList.map(item => {
-                        return (
-                            <Block title={item.title}>
-                                {item.body}
-                            </Block>
-                        )
-                    })
-
+                    <SubmitButton placeholder={'메롱'} />
             }
         </div >
     )
