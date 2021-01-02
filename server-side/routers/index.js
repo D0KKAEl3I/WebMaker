@@ -7,7 +7,6 @@ router.get('/', (req, res, next) => {
         name: 'bye',
         code: 8989
     })
-    console.log('ha')
 })
 
 module.exports = router

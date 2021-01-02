@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import SubmitButton from '../../components/SubmitButton'
-
+import Profile from '../../components/Profile'
 
 export default function Index() {
     const [infoList, setInfoList] = useState([])
@@ -12,7 +12,7 @@ export default function Index() {
         axios.get('http://localhost:8080').then(r => {
             setInfoList(r.data)
             setLoading(false)
-            console.log(r.data, 1)
+            console.log(r.data)
         }).catch(e => {
             console.log('error', e)
             setLoading(false)
@@ -29,9 +29,12 @@ export default function Index() {
                 loading ?
                     "loooooooooooooooooooooooooooooooooooooooooooooooading"
                     :
-
-                    <SubmitButton placeholder={infoList.id} />
-
+                    <div>
+                        <Profile id={infoList.id} title={infoList.code} >
+                            {infoList.name}
+                        </Profile>
+                        <SubmitButton placeholder={infoList.id} />
+                    </div>
             }
         </div >
     )

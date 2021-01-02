@@ -10,7 +10,7 @@ export default function SubmitButton({ placeholder }) {
     }
 
     return (
-        <button onClick={toggle} className={`${styles.button} ${clicked ? styles.active : ''} `}>
+        <button onClick={toggle} className={`${styles.button} ${clicked ? styles.active : ''}`}>
             {placeholder}
         </button>
     )
