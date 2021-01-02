@@ -8,8 +8,7 @@
     box-shadow: rgba(0,0,0,0.1) 0 0 4px;
     transition: .3s;
 }
-.button:hover{
-    background-color: rgba(0,0,0,0.05);
-    box-shadow: rgba(0,0,0,0.2) 0 0 8px;
+.active{
+    background-color: blue;
+    color: white;
 }
-

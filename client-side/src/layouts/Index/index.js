@@ -9,10 +9,10 @@ export default function Index() {
 
     function getpost() {
         setLoading(true)
-        axios.get('http://jsonplaceholder.typicode.com/posts').then(r => {
+        axios.get('http://localhost:8080').then(r => {
             setInfoList(r.data)
             setLoading(false)
-            console.log(r)
+            console.log(r.data, 1)
         }).catch(e => {
             console.log('error', e)
             setLoading(false)
@@ -29,7 +29,9 @@ export default function Index() {
                 loading ?
                     "loooooooooooooooooooooooooooooooooooooooooooooooading"
                     :
-                    <SubmitButton placeholder={'메롱'} />
+
+                    <SubmitButton placeholder={infoList.id} />
+
             }
         </div >
     )
