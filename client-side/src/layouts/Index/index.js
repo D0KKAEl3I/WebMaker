@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import SubmitButton from '../../components/SubmitButton'
-import Profile from '../../components/Profile'
+import { Link, Router, Route, Switch } from 'react-router-dom'
+import SubmitButton from 'components/SubmitButton'
+import ToggleButton from 'components/ToggleButton'
 
 export default function Index() {
     const [infoList, setInfoList] = useState([])
@@ -25,17 +26,10 @@ export default function Index() {
 
     return (
         <div>
-            {
-                loading ?
-                    "loooooooooooooooooooooooooooooooooooooooooooooooading"
-                    :
-                    <div>
-                        <Profile id={infoList.id} title={infoList.code} >
-                            {infoList.name}
-                        </Profile>
-                        <SubmitButton placeholder={infoList.id} />
-                    </div>
-            }
+            <ToggleButton onholder={'on'} offholder={'off'} />
+            <ToggleButton onholder={'on'} offholder={'off'} />
+            <ToggleButton onholder={'on'} offholder={'off'} />
+            <ToggleButton onholder={'on'} offholder={'off'} />
         </div >
     )
 }
