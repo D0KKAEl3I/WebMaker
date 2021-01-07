@@ -1,8 +1,5 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { Link, Router, Route, Switch } from 'react-router-dom'
-import SubmitButton from 'components/SubmitButton'
-import ToggleButton from 'components/ToggleButton'
 
 export default function Index() {
     const [infoList, setInfoList] = useState([])
