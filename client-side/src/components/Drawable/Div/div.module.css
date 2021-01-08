@@ -20,3 +20,15 @@
     border-color: rgb(17, 17, 17);
     background-color: gray;
 }
+
+.sizeSetter{
+    position: absolute;
+    width: 200px;
+    height: 120px;
+    bottom: 100%;
+    left: 100%;
+}
+.sizeSetterInput{
+    width: 80%;
+    height: 40%;
+}

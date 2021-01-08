@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 import styles from './div.module.css'
 
-const position = { x: 0, y: 0 }
+const position = { x: 50, y: 50 }
 
 export default function Div({ shape }) {
     const [selected, setSelected] = useState(false)
-
-    const [drag, setDrag] = useState({ x: 0, y: 0 })
 
     const [dragInfo, setDragInfo] = useState({
         isDragging: false,
@@ -15,8 +13,6 @@ export default function Div({ shape }) {
         lastTranslation: position,
     })
     const handleMouseDown = ({ clientX, clientY }) => {
-        setSelected(true)
-        console.log('down')
         if (!dragInfo.isDragging)
             setDragInfo({
                 ...dragInfo,
@@ -25,7 +21,6 @@ export default function Div({ shape }) {
             })
     }
     const handleMouseMove = ({ clientX, clientY }) => {
-        console.log('move', dragInfo)
         if (dragInfo.isDragging) {
             const { origin, lastTranslation } = dragInfo
             setDragInfo({
@@ -38,8 +33,6 @@ export default function Div({ shape }) {
         }
     }
     const handleMouseUp = () => {
-        setSelected(false)
-        console.log('up')
         if (dragInfo.isDragging) {
             const { translation } = dragInfo
             setDragInfo({
@@ -49,9 +42,16 @@ export default function Div({ shape }) {
             })
         }
     }
-    const shapePosition = {
+
+    let [width, setWidth] = useState(100)
+    let [height, setHeight] = useState(100)
+
+    const divStyle = {
+        width: width + 'px',
+        height: height + 'px',
         right: `${dragInfo.translation.x}px`,
-        bottom: `${dragInfo.translation.y}px`
+        bottom: `${dragInfo.translation.y}px`,
+        zIndex: dragInfo.isDragging ? 5 : 0
     }
 
     function shapeStyle(shape) {
@@ -66,15 +66,23 @@ export default function Div({ shape }) {
 
     return (
         <div
-            style={shapePosition}
+            style={divStyle}
+            onDoubleClick={() => setSelected(!selected)}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseMove}
             onMouseUp={handleMouseUp}
             className={`${styles.div} ${shapeStyle(shape)} ${selected ? styles.select : ''}`}>
+            {
+                selected ?
+                    <div className={styles.sizeSetter}>
+                        <input onChange={(e) => setWidth(parseInt(e.target.value.replaceAll('px', '')))} className={styles.sizeSetterInput} type='number' placeholder="width"></input>
+                        <input onChange={(e) => setHeight(parseInt(e.target.value.replaceAll('px', '')))} className={styles.sizeSetterInput} type='number' placeholder="height"></input>
+                    </div>
+                    :
+                    null
+            }
 
         </div >
-        // 
-
     )
 }
