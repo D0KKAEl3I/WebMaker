@@ -1,3 +1,3 @@
-import Index from "layouts/Index"
+import Index from 'layouts/Index'
 
-export default Index;
+export default Index

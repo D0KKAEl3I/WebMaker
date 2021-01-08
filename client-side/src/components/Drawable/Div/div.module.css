@@ -1,0 +1,22 @@
+.div{
+    background-color: white;
+    border: rgb(49, 49, 49) 1px solid;
+    position: absolute;
+}
+
+.square{
+    width: 100px;
+    height: 100px;
+}
+
+.round{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.select{
+    z-index: 99;
+    border-color: rgb(17, 17, 17);
+    background-color: gray;
+}

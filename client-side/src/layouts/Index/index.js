@@ -1,32 +1,20 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import Div from 'components/Drawable/Div'
 
 export default function Index() {
-    const [infoList, setInfoList] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [status, setStatus] = useState([]);
 
-    function getpost() {
-        setLoading(true)
-        axios.get('http://localhost:8080').then(r => {
-            setInfoList(r.data)
-            setLoading(false)
-            console.log(r.data)
-        }).catch(e => {
-            console.log('error', e)
-            setLoading(false)
-        })
+    function makeDiv(shape) {
+        setStatus(arr => [...arr, <Div shape={shape} />])
     }
-
-    useEffect(() => {
-        getpost()
-    }, [])
 
     return (
         <div>
-            <ToggleButton onholder={'on'} offholder={'off'} />
-            <ToggleButton onholder={'on'} offholder={'off'} />
-            <ToggleButton onholder={'on'} offholder={'off'} />
-            <ToggleButton onholder={'on'} offholder={'off'} />
-        </div >
+            <button onClick={() => makeDiv('square')}>square</button>
+            <button onClick={() => makeDiv('round')}>round</button>
+            {status.map(i => i)}
+            <Div shape={'round'} />
+        </div>
     )
 }
