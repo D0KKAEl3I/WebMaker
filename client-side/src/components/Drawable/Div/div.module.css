@@ -23,12 +23,8 @@
 
 .sizeSetter{
     position: absolute;
-    width: 200px;
-    height: 120px;
+    width: auto;
+    height: auto;
     bottom: 100%;
     left: 100%;
-}
-.sizeSetterInput{
-    width: 80%;
-    height: 40%;
 }

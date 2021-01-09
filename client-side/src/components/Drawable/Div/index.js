@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import styles from './div.module.css'
+import Input from 'components/Input'
 
 const position = { x: 50, y: 50 }
 
@@ -46,7 +47,7 @@ export default function Div({ shape }) {
         transform: `rotate(0deg)`,
         left: `${position.x}px`,
         top: `${position.y}px`,
-        backgroundColor: 'transparent'
+        backgroundColor: '#ffffff'
     })
 
     function shapeStyle(shape) {
@@ -70,28 +71,41 @@ export default function Div({ shape }) {
             className={`${styles.div} ${shapeStyle(shape)} ${selected ? styles.select : ''}`}>
             {
                 selected ?
-                    <div className={styles.sizeSetter}>
-                        <input
+                    <div
+                        style={{
+                            transform: divStyle.transform.toString().replace('(', '(-')
+                        }}
+                        className={styles.sizeSetter}>
+                        <Input
                             onChange={(e) => setDivStyle({
                                 ...divStyle,
                                 width: e.target.value + 'px'
                             })}
                             className={styles.sizeSetterInput} type='number' placeholder="width">
-                        </input>
-                        <input
+                        </Input>
+                        <Input
                             onChange={(e) => setDivStyle({
                                 ...divStyle,
                                 height: e.target.value + 'px'
                             })}
                             className={styles.sizeSetterInput} type='number' placeholder="height">
-                        </input>
-                        <input
+                        </Input>
+                        <Input
                             onChange={(e) => setDivStyle({
                                 ...divStyle,
                                 transform: `rotate(${e.target.value % 360}deg`
                             })}
                             className={styles.sizeSetterInput} type='number' placeholder="rotate">
-                        </input>
+                        </Input>
+                        <Input
+                            onChange={(e) => {
+                                setDivStyle({
+                                    ...divStyle,
+                                    backgroundColor: e.target.value
+                                })
+                            }}
+                            className={styles.sizeSetterInput} value={divStyle.backgroundColor} type='color' >
+                        </Input>
                     </div>
                     :
                     null
