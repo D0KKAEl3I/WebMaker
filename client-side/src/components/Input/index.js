@@ -15,6 +15,5 @@ export default function Input({ onChange, type, placeholder = '&nbsp;', value })
             >
             </input>
         </div>
-
     )
 }
