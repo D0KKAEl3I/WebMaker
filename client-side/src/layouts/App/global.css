@@ -1,4 +1,9 @@
-*{
-    padding: 0;margin: 0;
+* {
+    padding: 0;
+    margin: 0;
     --accent-color: rgb(0, 98, 255);
+}
+
+html {
+    overflow: hidden;
 }
