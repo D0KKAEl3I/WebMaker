@@ -1,0 +1,15 @@
+
+.origin{
+    padding: 5px;
+    outline: none;
+    border: black solid 2px;
+    border-radius: 4px;
+}
+.origin:focus{
+    border-color: var(--accent-color);
+}
+.label{
+    position: relative;
+    font-size: 12px;
+    color: gray;
+}

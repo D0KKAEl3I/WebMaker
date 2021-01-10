@@ -1,0 +1,15 @@
+.outline{
+    width:  85vw;
+    height: 90vh;
+    border: 1px black solid;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+}
+.pallete{
+    position: relative;
+    --width: 80%;
+    width : var(--width);
+    height: calc(var(--width)*(3/4));
+    border: 1px solid gray;
+}

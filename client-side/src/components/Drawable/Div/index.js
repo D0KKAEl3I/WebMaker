@@ -1,22 +1,18 @@
 import { useState, useEffect } from 'react';
 import styles from './div.module.css'
+import Input from 'components/Input'
 
-const position = { x: 0, y: 0 }
+const position = { x: 50, y: 50 }
 
 export default function Div({ shape }) {
     const [selected, setSelected] = useState(false)
 
-    const [drag, setDrag] = useState({ x: 0, y: 0 })
-
     const [dragInfo, setDragInfo] = useState({
         isDragging: false,
         origin: { x: 0, y: 0 },
-        translation: position,
         lastTranslation: position,
     })
     const handleMouseDown = ({ clientX, clientY }) => {
-        setSelected(true)
-        console.log('down')
         if (!dragInfo.isDragging)
             setDragInfo({
                 ...dragInfo,
@@ -25,34 +21,34 @@ export default function Div({ shape }) {
             })
     }
     const handleMouseMove = ({ clientX, clientY }) => {
-        console.log('move', dragInfo)
-        if (dragInfo.isDragging) {
+        if (dragInfo.isDragging && !selected) {
             const { origin, lastTranslation } = dragInfo
-            setDragInfo({
-                ...dragInfo,
-                translation: {
-                    x: Math.abs(clientX - (origin.x + lastTranslation.x)),
-                    y: Math.abs(clientY - (origin.y + lastTranslation.y)),
-                },
+            setDivStyle({
+                ...divStyle,
+                left: clientX - (origin.x - lastTranslation.x),
+                top: clientY - (origin.y - lastTranslation.y),
             })
         }
     }
     const handleMouseUp = () => {
-        setSelected(false)
-        console.log('up')
         if (dragInfo.isDragging) {
-            const { translation } = dragInfo
+            const { left, top } = divStyle
             setDragInfo({
                 ...dragInfo,
                 isDragging: false,
-                lastTranslation: { x: translation.x, y: translation.y },
+                lastTranslation: { x: parseInt(left.toString().replaceAll('px', '')), y: parseInt(top.toString().replaceAll('px', '')) },
             })
         }
     }
-    const shapePosition = {
-        right: `${dragInfo.translation.x}px`,
-        bottom: `${dragInfo.translation.y}px`
-    }
+
+    const [divStyle, setDivStyle] = useState({
+        width: 100 + 'px',
+        height: 100 + 'px',
+        transform: `rotate(0deg)`,
+        left: `${position.x}px`,
+        top: `${position.y}px`,
+        backgroundColor: '#ffffff'
+    })
 
     function shapeStyle(shape) {
         if (shape == "square") {
@@ -66,15 +62,55 @@ export default function Div({ shape }) {
 
     return (
         <div
-            style={shapePosition}
+            style={divStyle}
+            onDoubleClick={() => setSelected(!selected)}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseMove}
             onMouseUp={handleMouseUp}
             className={`${styles.div} ${shapeStyle(shape)} ${selected ? styles.select : ''}`}>
+            {
+                selected ?
+                    <div
+                        style={{
+                            transform: divStyle.transform.toString().replace('(', '(-')
+                        }}
+                        className={styles.sizeSetter}>
+                        <Input
+                            onChange={(e) => setDivStyle({
+                                ...divStyle,
+                                width: e.target.value + 'px'
+                            })}
+                            className={styles.sizeSetterInput} type='number' placeholder="width">
+                        </Input>
+                        <Input
+                            onChange={(e) => setDivStyle({
+                                ...divStyle,
+                                height: e.target.value + 'px'
+                            })}
+                            className={styles.sizeSetterInput} type='number' placeholder="height">
+                        </Input>
+                        <Input
+                            onChange={(e) => setDivStyle({
+                                ...divStyle,
+                                transform: `rotate(${e.target.value % 360}deg`
+                            })}
+                            className={styles.sizeSetterInput} type='number' placeholder="rotate">
+                        </Input>
+                        <Input
+                            onChange={(e) => {
+                                setDivStyle({
+                                    ...divStyle,
+                                    backgroundColor: e.target.value
+                                })
+                            }}
+                            className={styles.sizeSetterInput} value={divStyle.backgroundColor} type='color' >
+                        </Input>
+                    </div>
+                    :
+                    null
+            }
 
         </div >
-        // 
-
     )
 }

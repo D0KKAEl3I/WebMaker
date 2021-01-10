@@ -20,3 +20,11 @@
     border-color: rgb(17, 17, 17);
     background-color: gray;
 }
+
+.sizeSetter{
+    position: absolute;
+    width: auto;
+    height: auto;
+    bottom: 100%;
+    left: 100%;
+}
