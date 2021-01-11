@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import styles from './div.module.css'
+import styles from './shape.module.css'
 import Input from 'components/Input'
 
 const position = { x: 50, y: 50 }
 
-export default function Div({ shape }) {
+export default function Shape({ type, className }) {
     const [selected, setSelected] = useState(false)
 
     const [dragInfo, setDragInfo] = useState({
@@ -42,18 +42,16 @@ export default function Div({ shape }) {
     }
 
     const [divStyle, setDivStyle] = useState({
-        width: 100 + 'px',
-        height: 100 + 'px',
         transform: `rotate(0deg)`,
         left: `${position.x}px`,
         top: `${position.y}px`,
         backgroundColor: '#ffffff'
     })
 
-    function shapeStyle(shape) {
-        if (shape == "square") {
+    function shapeStyle(type) {
+        if (type == "square") {
             return styles.square;
-        } else if (shape == "round") {
+        } else if (type == "round") {
             return styles.round;
         } else {
             return
@@ -68,8 +66,8 @@ export default function Div({ shape }) {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseMove}
             onMouseUp={handleMouseUp}
-            className={`${styles.div} ${shapeStyle(shape)} ${selected ? styles.select : ''}`}>
-            {
+            className={`${styles.div} ${shapeStyle(type)} ${className}`}>
+            {/* {
                 selected ?
                     <div
                         style={{
@@ -109,7 +107,7 @@ export default function Div({ shape }) {
                     </div>
                     :
                     null
-            }
+            } */}
 
         </div >
     )
