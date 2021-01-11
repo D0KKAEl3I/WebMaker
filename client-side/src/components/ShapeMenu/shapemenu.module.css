@@ -1,0 +1,105 @@
+.text {
+    width: 20vw;
+    height: 94vh;
+    background-color: rgb(241, 194, 106);
+    font-size: 14px;
+    transition: .5s;
+    position: absolute;
+    top: 7.5vh;
+    right: 0;
+}
+
+.button {
+    display: block;
+    width: 1.3vw;
+    height: 9vh;
+    border: 1px rgb(241, 194, 106) solid;
+    background-color: rgb(219, 149, 19);
+    text-align: center;
+    color: #333;
+    transition: all 5s;
+    font-size: 1vw;
+    position: absolute;
+    top: 45%;
+    left: -6.2%;
+    outline: none;
+}
+
+.button>img {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.button:hover {
+    color: #fff;
+    box-shadow: 200px 0 0 0 rgba(0, 0, 0, 0.5) inset;
+}
+
+.tool {
+    width: 190px;
+    height: 25px;
+    background: white;
+    margin-left: 30px;
+    font-size: 14px;
+    line-height: 25px;
+}
+
+.searchImg {
+    position: relative;
+}
+
+.searchImg>img {
+    width: 20px;
+    margin-left: 16px;
+}
+
+.basic {
+    width: 250px;
+    height: 400px;
+    background: white;
+    margin: 25px auto 30px auto;
+    border-radius: 8px;
+
+}
+
+
+.basic>p {
+    font-size: 14px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.basic>div {
+    width: 100%;
+    display: flex;
+    height: 90%;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    justify-content: space-around;
+}
+
+.basic>div::-webkit-scrollbar {
+    margin-right: 4px;
+    width: 8px;
+    border-radius: 99px;
+    background-color: rgb(228, 228, 228);
+}
+
+.basic>div::-webkit-scrollbar-button {
+    display: none;
+}
+
+.basic>div::-webkit-scrollbar-thumb {
+    border-radius: 99px;
+    background-color: rgb(179, 179, 179);
+}
+
+.color {
+    width: 270px;
+    border-radius: 8px;
+    margin: -11px auto 30px auto;
+    background-color: rgb(209, 139, 9);
+    display: flex;
+    flex-wrap: wrap;
+    padding: 4px;
+}

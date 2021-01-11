@@ -1,4 +1,13 @@
-*{
-    padding: 0;margin: 0;
+* {
+    padding: 0;
+    margin: 0;
     --accent-color: rgb(0, 98, 255);
+}
+
+img {
+    vertical-align: middle;
+}
+
+html {
+    overflow: hidden;
 }
