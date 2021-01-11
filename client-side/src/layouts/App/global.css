@@ -4,6 +4,10 @@
     --accent-color: rgb(0, 98, 255);
 }
 
+img {
+    vertical-align: middle;
+}
+
 html {
     overflow: hidden;
 }

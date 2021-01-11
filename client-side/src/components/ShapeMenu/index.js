@@ -2,13 +2,38 @@ import styles from './shapemenu.module.css'
 import {useState} from 'react'
 import Input from 'components/Input'
 import Shape from 'components/ShapeMenu/Shape'
+import ColorBlock from 'components/ShapeMenu/ColorBlock'
 export default function ShapeMenu({children}) {
     const [show, setShow] = useState(true)
 
     function toggle() {
         setShow(!show)        
     }
-    
+    let colors = [
+        "#346234",
+        "#ff0000",
+        "#ffff00",
+        "#00ff00",
+        "#00ffff",
+        "#0000ff",
+        "#ff00ff",
+        "#ffffff",
+        "#777777",
+        "#000000",
+        
+    ]
+
+    const [color, setColor] = useState("#ffffff")
+
+
+    let shapes = [
+        {title:"직사각형", type:"square"},
+        {title:"둥근 직사각형", type:"roundsquare"},
+        {title:"원형", type:"round"},
+        {title:"캡슐", type:"capsule"},
+    ]
+
+
     return(
 
 
@@ -16,17 +41,28 @@ export default function ShapeMenu({children}) {
             show?
             "-306px":""
         }`}}>
-              <button className={styles.button} onClick = {toggle} >보기</button>
-              <Input className={styles.tool} placeholder={"Tool search"}></Input>
+              <button className={styles.button} onClick={toggle}>
+                  <img src="/img/arrow.png"/>
+                  
+                </button>
+                <div className={styles.searchImg}>
+                    <Input className={styles.tool} placeholder={"Tool search"}></Input>
+                   <img src="./img/free-icon-search-163073.svg"></img>
+                </div>
               <div className={styles.basic}>
                   <p>기본도형</p>
-                  <Shape className={styles.span} title={"직사각형"} type={"square"}></Shape>
-                  <Shape className={styles.span} title={"둥근직사각형"} type={"roundsquare"}></Shape>
-                  <Shape className={styles.span} title={"원형"} type={"round"}></Shape>
-                  <Shape className={styles.span} title={"캡슐형"} type={"square"}></Shape>
+                  <div>
+                  {
+                      shapes.map(item=><Shape style={{backgroundColor:color}} type={item.type} title={item.title}/>)
+                  }
                   </div>
-              <div className={styles.color}></div>
-              <div></div>
+                  </div>
+              <div className={styles.color}>
+                  {
+                      colors.map(item=><ColorBlock onClick={e=>{setColor(e.target.style.backgroundColor);}} color={item}></ColorBlock>)
+                  }
+
+              </div>
         </div>
         
       
