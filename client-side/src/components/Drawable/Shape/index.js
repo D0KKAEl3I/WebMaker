@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import styles from './shape.module.css'
-import Input from 'components/Input'
 
 const position = { x: 50, y: 50 }
 
-export default function Shape({ type, className, color }) {
+export default function Shape({ type, className, style = { width: '90px', height: '90px', backgroundColor: '#ffffff' } }) {
     const [selected, setSelected] = useState(false)
 
     const [dragInfo, setDragInfo] = useState({
@@ -30,6 +29,7 @@ export default function Shape({ type, className, color }) {
             })
         }
     }
+
     const handleMouseUp = () => {
         if (dragInfo.isDragging) {
             const { left, top } = divStyle
@@ -40,13 +40,6 @@ export default function Shape({ type, className, color }) {
             })
         }
     }
-
-    const [divStyle, setDivStyle] = useState({
-        // transform: `rotate(0deg)`,
-        left: `${position.x}px`,
-        top: `${position.y}px`,
-        backgroundColor: color
-    })
 
     function setType() {
         if (type == "square") {
@@ -64,7 +57,7 @@ export default function Shape({ type, className, color }) {
 
     return (
         <div
-            style={divStyle}
+            style={style}
             onDoubleClick={() => setSelected(!selected)}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}

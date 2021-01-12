@@ -2,19 +2,23 @@ import { useState, useEffect } from 'react'
 import Pallete from 'components/Drawable/Pallete'
 import Shape from 'components/Drawable/Shape'
 import styles from './index.module.css'
-import ShapeMenu from 'components/ShapeMenu'
+import StyleMenu from 'components/StyleMenu'
 
 export default function Index() {
 
     const [divs, setDivs] = useState([]);
 
-    const [color, setColor] = useState("#ffffff");
+    const [style, setStyle] = useState("#ffffff");
 
     function makeDiv(type) {
-        setDivs(arr => [...arr, <Shape className={styles.shape} color={color} type={type} width={60} height={30} />])
+        setDivs(arr => [...arr, <Shape className={styles.shape} type={type} width={60} height={30} />])
     }
 
+    const changeStyle = (e) => {
+        const { w, h, x, y } = e.target.form
 
+        setDivs([<Shape className={styles.shape} color={'#ff0000'} type={'round'} width={60} height={30} />])
+    }
 
     return (
         <div>
@@ -23,7 +27,8 @@ export default function Index() {
                     divs.map(i => i)
                 }
             </Pallete>
-            <ShapeMenu create={makeDiv} change={setColor} color={color}></ShapeMenu>
+            {/* <ShapeMenu makeDiv={makeDiv} change={setColor} color={color}></ShapeMenu> */}
+            <StyleMenu changeStyle={changeStyle}></StyleMenu>
         </div>
     )
 }
