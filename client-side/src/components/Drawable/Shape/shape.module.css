@@ -4,15 +4,28 @@
     position: absolute;
 }
 
-.square{
-    width: 100px;
-    height: 100px;
+.square {
+    width: 90px;
+    height: 90px;
 }
 
-.round{
-    width: 100px;
-    height: 100px;
+.roundsquare {
+    width: 90px;
+    height: 90px;
+    border-radius: 15px;
+}
+
+.round {
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
+}
+
+.capsule {
+    margin: 0 20px;
+    width: 50px;
+    height: 90px;
+    border-radius: 99999px;
 }
 
 .select{
