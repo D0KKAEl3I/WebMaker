@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Input from 'components/Input'
 import Shape from 'components/ShapeMenu/Shape'
 import ColorBlock from 'components/ShapeMenu/ColorBlock'
+import RightShapeMenu from 'components/Shapemenu2'
 export default function ShapeMenu({ create, change, color }) {
     const [show, setShow] = useState(true)
 

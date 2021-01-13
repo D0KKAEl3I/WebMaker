@@ -3,6 +3,7 @@ import Pallete from 'components/Drawable/Pallete'
 import Shape from 'components/Drawable/Shape'
 import styles from './index.module.css'
 import ShapeMenu from 'components/ShapeMenu'
+import SideMenu from 'components/Shapemenu2'
 
 export default function Index() {
 
@@ -18,12 +19,14 @@ export default function Index() {
 
     return (
         <div>
-            <Pallete>
+            <SideMenu></SideMenu>
+
+            {/* <Pallete>
                 {
                     divs.map(i => i)
                 }
-            </Pallete>
-            <ShapeMenu create={makeDiv} change={setColor} color={color}></ShapeMenu>
+            </Pallete> */}
+            {/* <ShapeMenu create={makeDiv} change={setColor} color={color}></ShapeMenu> */}
         </div>
     )
 }
