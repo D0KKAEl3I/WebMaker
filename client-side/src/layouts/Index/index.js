@@ -4,6 +4,7 @@ import Shape from 'components/Drawable/Shape'
 import styles from './index.module.css'
 import StyleMenu from 'components/StyleMenu'
 import ShapeMenu from 'components/ShapeMenu'
+// import ContextMenu from 'components/ContextMenu'
 
 export default function Index() {
 
