@@ -12,26 +12,37 @@ export default function Index() {
     const [style, setStyle] = useState("#ffffff");
 
     function makeDiv(type) {
-        setDivs(arr => [...arr, <Shape className={styles.shape} type={type} width={60} height={30} />])
+        setDivs(arr => [...arr, <Shape id={arr.length} select={select} className={styles.shape} type={type} />])
     }
 
     const changeStyle = (e) => {
-        const { w, h, x, y } = e.target.form
-
-        setDivs([<Shape className={styles.shape} type={'round'} width={60} height={30} />])
+        const { width, height, left, top } = e.target.form
+        console.log(e.target.form)
+        let style = { width: width, height: height, left: left, top: top }
+        console.log(style)
+        setDivs(arr => {
+            arr[selectedDivStyle.index] = <Shape id={selectedDivStyle.index} select={select} className={styles.shape} type={selectedDivStyle.elementInfo.index} style={style} />;
+            return arr;
+        })
     }
 
+    const [selectedDivStyle, setSelectedDivStyle] = useState({ elementInfo: null, style: null })
 
+    function select(elementInfo, style) {
+        setSelectedDivStyle({ elementInfo, style })
+        console.log(selectedDivStyle.style)
+    }
 
     return (
         <div>
+            <button onClick={() => makeDiv('round')}></button>
             <Pallete>
                 {
                     divs.map(i => i)
                 }
             </Pallete>
-            <ShapeMenu functions={{ makeDiv }}></ShapeMenu>
-            <StyleMenu changeStyle={changeStyle}></StyleMenu>
+            {/* <ShapeMenu functions={{ makeDiv }}></ShapeMenu> */}
+            <StyleMenu changeStyle={changeStyle} selectedDivStyle={selectedDivStyle.style ? selectedDivStyle.style : null}></StyleMenu>
         </div>
     )
 }

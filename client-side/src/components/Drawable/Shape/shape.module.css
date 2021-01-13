@@ -1,4 +1,4 @@
-.div{
+.div {
     background-color: white;
     border: rgb(49, 49, 49) 1px solid;
     position: absolute;
@@ -28,7 +28,7 @@
     border-radius: 99999px;
 }
 
-.select{
+.select {
     z-index: 99;
     border-color: rgb(17, 17, 17);
     background-color: gray;
