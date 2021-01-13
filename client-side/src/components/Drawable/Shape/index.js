@@ -2,16 +2,26 @@ import { loadGetInitialProps } from 'next/dist/next-server/lib/utils';
 import { useState, useEffect } from 'react';
 import styles from './shape.module.css'
 
-export default function Shape({ style = { width: '90px', height: '90px', backgroundColor: '#ffffff', left: 0, top: 0 }, ...params }) {
-    const [selected, setSelected] = useState(false)
+
+export default function Shape({ style, ...params }) {
 
     const [divStyle, setDivStyle] = useState(style)
+
+    useEffect(() => {
+        if (JSON.stringify(style) !== JSON.stringify(divStyle)) {
+            console.log(style, divStyle)
+            setDivStyle(style)
+        } else {
+            console.log(divStyle)
+        }
+    }, [style])
 
     const [dragInfo, setDragInfo] = useState({
         isDragging: false,
         origin: { x: 0, y: 0 },
         lastTranslation: { x: 0, y: 0 },
     })
+
     const handleMouseDown = ({ clientX, clientY }) => {
         if (!dragInfo.isDragging)
             setDragInfo({
@@ -21,14 +31,13 @@ export default function Shape({ style = { width: '90px', height: '90px', backgro
             })
     }
     const handleMouseMove = ({ clientX, clientY }) => {
-        if (dragInfo.isDragging && !selected) {
+        if (dragInfo.isDragging) {
             const { origin, lastTranslation } = dragInfo
             setDivStyle({
                 ...divStyle,
                 left: clientX - (origin.x - lastTranslation.x) + 'px',
                 top: clientY - (origin.y - lastTranslation.y) + 'px',
             })
-            params.select(params, divStyle)
         }
     }
 
@@ -40,6 +49,7 @@ export default function Shape({ style = { width: '90px', height: '90px', backgro
                 isDragging: false,
                 lastTranslation: { x: parseInt(left.toString().replaceAll('px', '')), y: parseInt(top.toString().replaceAll('px', '')) },
             })
+            params.select(params, divStyle)
         }
     }
 
