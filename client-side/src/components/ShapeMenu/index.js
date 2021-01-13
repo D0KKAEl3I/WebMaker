@@ -1,9 +1,14 @@
 import styles from './shapemenu.module.css'
 import { useState } from 'react'
 import Input from 'components/Input'
+<<<<<<< HEAD
 import Shape from 'components/ShapeMenu/Shape'
 import ColorBlock from 'components/ShapeMenu/ColorBlock'
 import RightShapeMenu from 'components/Shapemenu2'
+=======
+import Shape from './Shape'
+import ColorBlock from './ColorBlock'
+>>>>>>> 77b93ef02277b9d89535873f8f6f361f5f86a9bf
 export default function ShapeMenu({ create, change, color }) {
     const [show, setShow] = useState(true)
 
@@ -40,10 +45,6 @@ export default function ShapeMenu({ create, change, color }) {
                 "-20vw" : ""
                 }`
         }}>
-            <button className={styles.button} onClick={toggle}>
-                <img src="/img/arrow.png" />
-
-            </button>
             <div className={styles.searchImg}>
                 <Input className={styles.tool} placeholder={"Tool search"}></Input>
                 <img src="./img/free-icon-search-163073.svg"></img>
@@ -60,7 +61,6 @@ export default function ShapeMenu({ create, change, color }) {
                 {
                     colors.map(item => <ColorBlock onClick={e => { change(e.target.style.backgroundColor); }} color={item}></ColorBlock>)
                 }
-
             </div>
         </div>
 
