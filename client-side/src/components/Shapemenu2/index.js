@@ -7,6 +7,5 @@ export default function Shapemenu2(){
             <div className={styles.roundsquare}></div>
             <div className={styles.round}></div>
             <div className={styles.textlogo}>T</div>
-
         </div>
     )}
