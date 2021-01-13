@@ -9,7 +9,7 @@ export default function Shape({ title, type, className, style, onClick }) {
             return styles.round;
         } else if (type == "capsule") {
             return styles.capsule;
-        } else if (type == "diamond") {
+        } else if (type == "diamond") {``
             return styles.diamond;
         }
     }
