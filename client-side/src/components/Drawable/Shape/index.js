@@ -3,8 +3,10 @@ import styles from './shape.module.css'
 
 const position = { x: 50, y: 50 }
 
-export default function Shape({ type, className, style = { width: '90px', height: '90px', backgroundColor: '#ffffff' } }) {
+export default function Shape({ type, className, style = { width: '90px', height: '90px', backgroundColor: '#ffffff', left: 0, top: 0 } }) {
     const [selected, setSelected] = useState(false)
+
+    const [divStyle, setDivStyle] = useState(style)
 
     const [dragInfo, setDragInfo] = useState({
         isDragging: false,
@@ -24,9 +26,10 @@ export default function Shape({ type, className, style = { width: '90px', height
             const { origin, lastTranslation } = dragInfo
             setDivStyle({
                 ...divStyle,
-                left: clientX - (origin.x - lastTranslation.x),
-                top: clientY - (origin.y - lastTranslation.y),
+                left: clientX - (origin.x - lastTranslation.x) + 'px',
+                top: clientY - (origin.y - lastTranslation.y) + 'px',
             })
+            console.log(divStyle, dragInfo.origin)
         }
     }
 
@@ -57,7 +60,7 @@ export default function Shape({ type, className, style = { width: '90px', height
 
     return (
         <div
-            style={style}
+            style={divStyle}
             onDoubleClick={() => setSelected(!selected)}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}

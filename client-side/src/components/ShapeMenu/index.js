@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Input from 'components/Input'
 import Shape from './Shape'
 import ColorBlock from './ColorBlock'
-export default function ShapeMenu({ create, change, color }) {
+export default function ShapeMenu({ functions, color }) {
     const [show, setShow] = useState(true)
 
     function toggle() {
@@ -35,9 +35,7 @@ export default function ShapeMenu({ create, change, color }) {
 
 
         <div className={styles.text} style={{
-            right: ` ${show ?
-                "-20vw" : ""
-                }`
+            right: "0"
         }}>
             <div className={styles.searchImg}>
                 <Input className={styles.tool} placeholder={"Tool search"}></Input>
@@ -47,7 +45,7 @@ export default function ShapeMenu({ create, change, color }) {
                 <p>기본도형</p>
                 <div>
                     {
-                        shapes.map(item => <Shape onClick={create} style={{ backgroundColor: color }} type={item.type} title={item.title} />)
+                        shapes.map(item => <Shape onClick={functions.makeDiv} style={{ backgroundColor: color }} type={item.type} title={item.title} />)
                     }
                 </div>
             </div>
