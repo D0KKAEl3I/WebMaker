@@ -9,7 +9,7 @@ export default function StyleMenu({ changeStyle, selectedDivStyle }) {
                 <Input label="H" type="number" placeholder="height" name="height" value={parseInt(selectedDivStyle.height.replace('px', ''))}></Input>
                 <Input label="X" type="number" placeholder="left" name="left" value={parseInt(selectedDivStyle.left.replace('px', ''))}></Input>
                 <Input label="Y" type="number" placeholder="top" name="top" value={parseInt(selectedDivStyle.top.replace('px', ''))}></Input>
-                {/* <Input label="C" type="color" placeholder="top" name="top" value={parseInt(selectedDivStyle.replace('px', ''))}></Input> */}
+                <Input label="R" type="number" placeholder="rotate" name="rotate" value={parseInt(selectedDivStyle.transform.replace('rotate(', '').replace('deg)', '')) % 360}></Input>
             </form>
         </div>
     )
