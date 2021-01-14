@@ -8,10 +8,7 @@ export default function Shape({ style, ...params }) {
 
     useEffect(() => {
         if (JSON.stringify(style) !== JSON.stringify(divStyle)) {
-            console.log(style, divStyle)
             setDivStyle(style)
-        } else {
-            console.log(divStyle)
         }
     }, [style])
 
@@ -48,6 +45,7 @@ export default function Shape({ style, ...params }) {
                 isDragging: false,
                 lastTranslation: { x: parseInt(left.toString().replaceAll('px', '')), y: parseInt(top.toString().replaceAll('px', '')) },
             })
+            console.log(divStyle)
             params.select(params, divStyle)
         }
     }
