@@ -1,19 +1,18 @@
  @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&display=swap');
 .rightmenu2{
-    padding-top: 26px;
     width: 65px;
     height: 100vh;
     background-color: wheat;
-    border-right:2px gray solid ;  
+    border-right: var(--border) ;  
+    display: flex;
+    flex-direction: column;
 }
-.shape, .square,.roundsquare,.round{
+.shape, .square,.roundsquare,.round, .textlogo{
     border: 2px solid #000000;
     /* position: absolute; */
-    display: flex;
-    flex-direction: row;
-    width: 20px;
-    height: 20px;
-    margin: 0 auto 40px auto ;
+    width: 32px;
+    height: 32px;
+    margin: 20px auto;
 }
 .roundsquare {
     border-radius: 8px;
@@ -23,9 +22,9 @@
 }
 .textlogo{
     font-family: 'Bodoni Moda', serif;
-    font-size: 2.5em;
-    margin-left: 19px;
-    margin-top: -10px;
-
+    font-size: 1.32em;
+    line-height: 32px;
+    text-align: center;
+    font-weight: bold;
 }
     

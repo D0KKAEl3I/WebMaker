@@ -15,8 +15,9 @@ export default function Index() {
     }
 
     const changeStyle = (e) => {
+        console.log(e)
         const { width, height, left, top } = e.target.form
-        let style = { width: width.value + 'px', height: height.value + 'px', left: left.value, top: top.value }
+        let style = { width: width.value + 'px', height: height.value + 'px', left: left.value + 'px', top: top.value + 'px' }
         setSelectedDivStyle({ ...selectedDivStyle, style })
         setDivs(arr => {
             var id = selectedDivStyle.elementInfo.id
@@ -33,8 +34,7 @@ export default function Index() {
 
     return (
         <div>
-            <button onClick={() => makeDiv('round')}>fjk</button>
-            <Pallete>
+            <Pallete style={{ marginLeft: '65px' }}>
                 {
                     divs.map(i => <Shape id={i.id} select={i.select} className={i.className} type={i.type} style={i.style} />)
                 }

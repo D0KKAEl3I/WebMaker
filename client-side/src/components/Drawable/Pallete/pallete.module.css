@@ -1,7 +1,7 @@
 .outline{
     width:  85vw;
     height: 90vh;
-    border: 1px black solid;
+    border: var(--border);
     overflow: hidden;
     position: absolute;
     bottom: 0;
@@ -11,5 +11,5 @@
     --width: 80%;
     width : var(--width);
     height: calc(var(--width)*(3/4));
-    border: 1px solid gray;
+    border: var(--border);
 }

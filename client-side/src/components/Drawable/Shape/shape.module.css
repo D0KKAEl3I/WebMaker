@@ -1,6 +1,6 @@
 .div {
     background-color: white;
-    border: rgb(49, 49, 49) 1px solid;
+    border: var(--border);
     position: absolute;
 }
 

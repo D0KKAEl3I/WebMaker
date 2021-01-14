@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     --accent-color: rgb(0, 98, 255);
+    --border : gray 2px solid
 }
 
 img {
@@ -9,6 +10,6 @@ img {
 }
 
 html {
-    overflow: hidden;
+    /* overflow: hidden; */
     background-color: rgb(238, 230, 230) ;
 }
