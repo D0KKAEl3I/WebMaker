@@ -39,7 +39,7 @@ export default function Index() {
                     divs.map(i => <Shape id={i.id} select={i.select} className={i.className} type={i.type} style={i.style} />)
                 }
             </Pallete>
-            {/* <ShapeMenu functions={{ makeDiv }}></ShapeMenu> */}
+            <ShapeMenu functions={{ makeDiv }}></ShapeMenu>
             <StyleMenu changeStyle={changeStyle} selectedDivStyle={selectedDivStyle.style ? selectedDivStyle.style : { width: '', height: '', left: '', top: '' }}></StyleMenu>
         </div>
     )
