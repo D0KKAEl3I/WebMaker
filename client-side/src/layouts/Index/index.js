@@ -11,13 +11,13 @@ export default function Index() {
     const [divs, setDivs] = useState([]);
 
     function makeDiv(type) {
-        setDivs(arr => [...arr, { id: arr.length, select: select, className: styles.shape, type: type, style: { width: '90px', height: '90px', left: 0, top: 0 } }])
+        setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, style: { width: '90px', height: '90px', left: 0, top: 0, transform: 'rotate(0deg)' } }])
     }
 
     const changeStyle = (e) => {
         if (selectedDivStyle.elementInfo && selectedDivStyle.style) {
-            const { width, height, left, top } = e.target.form
-            let style = { width: width.value + 'px', height: height.value + 'px', left: left.value + 'px', top: top.value + 'px' }
+            const { width, height, left, top, rotate } = e.target.form
+            let style = { width: width.value + 'px', height: height.value + 'px', left: left.value + 'px', top: top.value + 'px', transform: `rotate(${rotate.value + 'deg'})` }
             setSelectedDivStyle({ ...selectedDivStyle, style })
             setDivs(arr => {
                 var id = selectedDivStyle.elementInfo.id
