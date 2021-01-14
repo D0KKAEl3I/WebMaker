@@ -1,11 +1,17 @@
 .rightonclic{
     position: fixed;
-    width: 87px;
-    height: 30px;
-    background-color: rgb(226, 226, 226);
-    text-align: center;
-    line-height: 30px;
+    width: 270px;
+    height: 240px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.80);
 }
-.rightonclic:hover{
-    background-color: rgb(109, 109, 109);
+.rightonclic>div{
+    margin-top: 11px;
+    padding-left: 20px;
+    width: 250px;
+    height: 35px;
+    line-height: 35px;
+}
+.rightonclic>div:hover{
+    background-color: rgba(78, 78, 78, 0.87);
 }

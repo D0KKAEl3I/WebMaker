@@ -75,6 +75,7 @@ export default function Shape({ style, ...params }) {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseMove}
             onMouseUp={handleMouseUp}
+            onContextMenu={params.onContextMenu}
             className={`${styles.div} ${setType()} ${params.className} ${dragInfo.isDragging ? styles.select : ''}`}>
         </div >
     )

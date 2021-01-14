@@ -33,16 +33,20 @@ export default function Index() {
         setSelectedDivStyle({ elementInfo, style })
     }
     const [contextMenu, setContextMenu] = useState({ display: 'none', left: 0, top: 0 })
+    function onContextMenu(e) {
+        e.preventDefault();
+        setContextMenu({ display: 'block', left: e.pageX + 1 + 'px', top: e.pageY + 1 + 'px' })
+    }
     return (
-        <div>
+        <div onClick={() => { setContextMenu({ display: 'none' }) }} >
             <Pallete style={{ marginLeft: '65px' }}>
                 {
-                    divs.map(i => <Shape id={i.id} select={i.select} className={i.className} type={i.type} style={i.style} />)
+                    divs.map(i => <Shape id={i.id} select={i.select} className={i.className} type={i.type} style={i.style} onContextMenu={onContextMenu}/>)
                 }
             </Pallete>
             <ShapeMenu functions={{ makeDiv }}></ShapeMenu>
             <StyleMenu changeStyle={changeStyle} selectedDivStyle={selectedDivStyle.style ? selectedDivStyle.style : { width: '', height: '', left: '', top: '' }}></StyleMenu>
-            <ContextMenu style={contextMenu} />
+            <ContextMenu style={contextMenu}/>
         </div>
     )
 }

@@ -12,7 +12,6 @@ export default function jisoo() {
 
     const [contextMenu, setContextMenu] = useState({ display: 'none', left: 0, top: 0 })
     function onContextMenu(e) {
-        console.log(e)
         e.preventDefault();
         setContextMenu({ display: 'block', left: e.pageX + 1 + 'px', top: e.pageY + 1 + 'px' })
     }
