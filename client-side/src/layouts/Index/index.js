@@ -10,73 +10,69 @@ import Topmenu from 'components/Topmenu'
 export default function Index() {
 
     const [divs, setDivs] = useState([]);
-    const [selectedDivStyle, setSelectedDivStyle] = useState({ elementInfo: null, style: null })
 
-    const makeDiv = (type) => {
-        setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, style: { width: '90px', height: '90px', left: '0px', top: '0px', backgroundColor: '#ffffff', transform: 'rotate(0deg)' }, onContextMenu: onContextMenu }])
-    }
+    const [selectedDivStyle, setSelectedDivStyle] = useState({ elementInfo: null, style: null })
 
     const changeStyle = (e) => {
         if (selectedDivStyle.elementInfo && selectedDivStyle.style) {
             const { width, height, left, top, rotate } = e.target.form
-            let style = { width: width.value + 'px', height: height.value + 'px', left: left.value + 'px', top: top.value + 'px', transform: `rotate(${rotate.value + 'deg'})`, ...selectedDivStyle.style }
-            setSelectedDivStyle({ ...selectedDivStyle, style })
+            let style = { ...selectedDivStyle.style, width: width.value + 'px', height: height.value + 'px', left: left.value + 'px', top: top.value + 'px', transform: `rotate(${rotate.value}deg)` }
+            setSelectedDivStyle({ ...selectedDivStyle, style: style })
             setDivs(arr => {
-                let { id, className, type } = selectedDivStyle.elementInfo
-                arr[id] = { id: id, select: select, className: className, type: type, style: style, onContextMenu: onContextMenu };
+                let { id } = selectedDivStyle.elementInfo
+                arr[id] = { ...arr[id], style: style };
                 return arr;
             })
         }
     }
 
-    const changeColor = (color) => {
+    const changeColor = async (color) => {
         if (!selectedDivStyle.style) return
         setSelectedDivStyle({ ...selectedDivStyle, style: { ...selectedDivStyle.style, backgroundColor: color } })
-    }
-
-    useEffect(() => {
-        if (!selectedDivStyle.elementInfo) return
         setDivs(arr => {
-            let { id, className, type } = selectedDivStyle.elementInfo
-            arr[id] = { id: id, select: select, className: className, type: type, style: style, onContextMenu: onContextMenu };
+            let { id } = selectedDivStyle.elementInfo
+            arr[id] = { ...arr[id], style: selectedDivStyle.style };
             return arr;
         })
-    }, [])
-
+    }
 
     const select = (elementInfo, style) => {
-        setSelectedDivStyle({ elementInfo, style })
+        setSelectedDivStyle({ elementInfo: elementInfo, style: style })
         setDivs(arr => {
             let { id } = elementInfo
             arr[id] = { ...arr[id], style: style };
             return arr;
         })
     }
+
     const [contextMenu, setContextMenu] = useState({ display: 'none', left: 0, top: 0 })
+
     const onContextMenu = (e) => {
         e.preventDefault();
         setContextMenu({ display: 'block', left: e.pageX + 1 + 'px', top: e.pageY + 1 + 'px' })
     }
 
+    const makeDiv = (type) => {
+        setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, style: { width: '90px', height: '90px', left: '0px', top: '0px', backgroundColor: '#ffffff', transform: 'rotate(0deg)' }, onContextMenu: onContextMenu }])
+    }
+
     const copyDiv = () => {
-        if (!selectedDivStyle.elementInfo) return
-        let { className, type } = selectedDivStyle.elementInfo
-        setDivs(arr => [...arr, { id: arr.length, select: select, className: className, type: type, style: selectedDivStyle.style, onContextMenu: onContextMenu }])
+        if (!selectedDivStyle.elementInfo) { alert('복사할 대상을 선택해 주세요.'); return }
+        setDivs(arr => [...arr, { ...selectedDivStyle.elementInfo, id: arr.length, style: selectedDivStyle.style }])
     }
 
     const deleteDiv = () => {
-        if (!selectedDivStyle.elementInfo) return
+        if (!selectedDivStyle.elementInfo) { alert('삭제할 대상을 선택해 주세요.'); return }
         setDivs(arr => {
             let index = selectedDivStyle.elementInfo.id;
-            console.log(arr[index].style)
             arr.splice(index, 1);
+            console.log(arr)
             for (let i = index; i < arr.length; i++) {
-                let info = arr[i]
-                arr[i] = { id: i, select: info.select, className: info.className, type: info.type, style: info.style, onContextMenu: info.onContextMenu }
-                console.log(info.style, arr[i].style)
+                arr[i] = { ...arr[i], id: i }
             }
             return arr;
         })
+        setSelectedDivStyle({ elementInfo: null, style: null })
     }
 
 

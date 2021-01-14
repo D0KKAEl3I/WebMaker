@@ -3,7 +3,7 @@ export default function InputWithLabel({ type, label, name, value, placholder, r
     return (
         <div>
             <span className={styles.label}>{label}</span>
-            <input className={styles.input} name={name} value={value} placeholder={placholder} type={type}></input>
+            <input readOnly={value == ''} className={styles.input} name={name} value={value} placeholder={placholder} type={type}></input>
         </div>
     )
 }

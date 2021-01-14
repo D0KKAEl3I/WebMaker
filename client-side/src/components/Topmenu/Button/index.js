@@ -1,5 +1,5 @@
 import styles from './button.module.css'
-export default function Button({ children, title, style, onClick }) {
+export default function Button({ children, title, style, onClick = () => { alert('미구현') } }) {
     return (
         <div className={styles.container} style={style}>
             <button onClick={onClick} className={styles.button}>{children}</button>

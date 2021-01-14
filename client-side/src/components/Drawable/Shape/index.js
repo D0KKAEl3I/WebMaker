@@ -10,7 +10,7 @@ export default function Shape({ style, ...params }) {
         if (JSON.stringify(style) !== JSON.stringify(divStyle)) {
             setDivStyle(style)
         }
-    }, [style])
+    }, [style, params.id])
 
     const [dragInfo, setDragInfo] = useState({
         isDragging: false,
@@ -24,10 +24,12 @@ export default function Shape({ style, ...params }) {
                 ...dragInfo,
                 isDragging: true,
                 origin: { x: clientX, y: clientY },
+                lastTranslation: { x: parseInt(divStyle.left.replace('px', '')), y: parseInt(divStyle.top.replace('px', '')) }
             })
     }
     const handleMouseMove = ({ clientX, clientY }) => {
         if (dragInfo.isDragging) {
+            console.log(dragInfo)
             const { origin, lastTranslation } = dragInfo
             setDivStyle({
                 ...divStyle,
@@ -45,7 +47,6 @@ export default function Shape({ style, ...params }) {
                 isDragging: false,
                 lastTranslation: { x: parseInt(left.toString().replaceAll('px', '')), y: parseInt(top.toString().replaceAll('px', '')) },
             })
-            console.log(divStyle)
             params.select(params, divStyle)
         }
     }
@@ -66,6 +67,7 @@ export default function Shape({ style, ...params }) {
 
     return (
         <div
+            key={params.id}
             style={divStyle}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
@@ -73,6 +75,7 @@ export default function Shape({ style, ...params }) {
             onMouseUp={handleMouseUp}
             onContextMenu={params.onContextMenu}
             className={`${styles.div} ${setType()} ${params.className} ${dragInfo.isDragging ? styles.select : ''}`}>
+            {params.id}
         </div >
     )
 }

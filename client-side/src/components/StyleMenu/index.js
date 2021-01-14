@@ -6,11 +6,11 @@ export default function StyleMenu({ functions, selectedDivStyle }) {
     return (
         <div className={styles.container}>
             <form onChange={functions.changeStyle}>
-                <Input label="W" type="number" placeholder="width" name="width" value={parseInt(selectedDivStyle.width.replace('px', ''))}></Input>
-                <Input label="H" type="number" placeholder="height" name="height" value={parseInt(selectedDivStyle.height.replace('px', ''))}></Input>
-                <Input label="X" type="number" placeholder="left" name="left" value={parseInt(selectedDivStyle.left.replace('px', ''))}></Input>
-                <Input label="Y" type="number" placeholder="top" name="top" value={parseInt(selectedDivStyle.top.replace('px', ''))}></Input>
-                <Input label="R" type="number" placeholder="rotate" name="rotate" value={parseInt(selectedDivStyle.transform.replace('rotate(', '').replace('deg)', '')) % 360}></Input>
+                <Input label="W" type="number" placeholder="width" name="width" value={selectedDivStyle.width ? parseInt(selectedDivStyle.width.replace('px', '')) : ''}></Input>
+                <Input label="H" type="number" placeholder="height" name="height" value={selectedDivStyle.height ? parseInt(selectedDivStyle.height.replace('px', '')) : ''}></Input>
+                <Input label="X" type="number" placeholder="left" name="left" value={selectedDivStyle.left ? parseInt(selectedDivStyle.left.replace('px', '')) : ''}></Input>
+                <Input label="Y" type="number" placeholder="top" name="top" value={selectedDivStyle.top ? parseInt(selectedDivStyle.top.replace('px', '')) : ''}></Input>
+                <Input label="R" type="number" placeholder="rotate" name="rotate" value={selectedDivStyle.transform ? parseInt(selectedDivStyle.transform.replace('rotate(', '').replace('deg)', '')) % 360 : ''}></Input>
             </form>
             <div>
                 <ColorBlock color='#ff0000' onClick={(e) => functions.changeColor('#ff0000')} />
@@ -22,7 +22,6 @@ export default function StyleMenu({ functions, selectedDivStyle }) {
                 <ColorBlock color='#ffffff' onClick={(e) => functions.changeColor('#ffffff')} />
                 <ColorBlock color='#000000' onClick={(e) => functions.changeColor('#000000')} />
             </div>
-
         </div>
     )
 }
