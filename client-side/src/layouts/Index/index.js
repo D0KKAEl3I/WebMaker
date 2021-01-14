@@ -4,7 +4,7 @@ import Shape from 'components/Drawable/Shape'
 import styles from './index.module.css'
 import StyleMenu from 'components/StyleMenu'
 import ShapeMenu from 'components/ShapeMenu'
-// import ContextMenu from 'components/ContextMenu'
+import ContextMenu from 'components/ContextMenu'
 
 export default function Index() {
 
@@ -31,7 +31,12 @@ export default function Index() {
     function select(elementInfo, style) {
         setSelectedDivStyle({ elementInfo, style })
     }
-
+    const [contextMenu, setContextMenu] = useState({ display: 'none', left: 0, top: 0 })
+    function onContextMenu(e) {
+        console.log(e)
+        e.preventDefault();
+        setContextMenu({ display: 'block', left: e.pageX + 1 + 'px', top: e.pageY + 1 + 'px' })
+    }
     return (
         <div>
             <Pallete style={{ marginLeft: '65px' }}>
@@ -41,6 +46,7 @@ export default function Index() {
             </Pallete>
             <ShapeMenu functions={{ makeDiv }}></ShapeMenu>
             <StyleMenu changeStyle={changeStyle} selectedDivStyle={selectedDivStyle.style ? selectedDivStyle.style : { width: '', height: '', left: '', top: '' }}></StyleMenu>
+            <ContextMenu style={contextMenu} />
         </div>
     )
 }
