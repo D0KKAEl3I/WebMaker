@@ -15,15 +15,16 @@ export default function Index() {
     }
 
     const changeStyle = (e) => {
-        console.log(e)
-        const { width, height, left, top } = e.target.form
-        let style = { width: width.value + 'px', height: height.value + 'px', left: left.value + 'px', top: top.value + 'px' }
-        setSelectedDivStyle({ ...selectedDivStyle, style })
-        setDivs(arr => {
-            var id = selectedDivStyle.elementInfo.id
-            arr[id] = { id: id, select: select, className: styles.shape, type: selectedDivStyle.elementInfo.type, style: selectedDivStyle.style };
-            return arr;
-        })
+        if (selectedDivStyle.elementInfo && selectedDivStyle.style) {
+            const { width, height, left, top } = e.target.form
+            let style = { width: width.value + 'px', height: height.value + 'px', left: left.value + 'px', top: top.value + 'px' }
+            setSelectedDivStyle({ ...selectedDivStyle, style })
+            setDivs(arr => {
+                var id = selectedDivStyle.elementInfo.id
+                arr[id] = { id: id, select: select, className: styles.shape, type: selectedDivStyle.elementInfo.type, style: selectedDivStyle.style };
+                return arr;
+            })
+        }
     }
 
     const [selectedDivStyle, setSelectedDivStyle] = useState({ elementInfo: null, style: null })
@@ -32,11 +33,6 @@ export default function Index() {
         setSelectedDivStyle({ elementInfo, style })
     }
     const [contextMenu, setContextMenu] = useState({ display: 'none', left: 0, top: 0 })
-    function onContextMenu(e) {
-        console.log(e)
-        e.preventDefault();
-        setContextMenu({ display: 'block', left: e.pageX + 1 + 'px', top: e.pageY + 1 + 'px' })
-    }
     return (
         <div>
             <Pallete style={{ marginLeft: '65px' }}>

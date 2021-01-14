@@ -1,14 +1,15 @@
-import Input from 'components/Input'
+import Input from 'components/InputWithLabel'
 import styles from './stylemenu.module.css'
 
 export default function StyleMenu({ changeStyle, selectedDivStyle }) {
     return (
         <div className={styles.container}>
             <form onChange={changeStyle}>
-                <Input type="number" placeholder="width" name="width" value={`${selectedDivStyle.width}`}></Input>
-                <Input type="number" placeholder="height" name="height" value={`${selectedDivStyle.height}`}></Input>
-                <Input type="number" placeholder="left" name="left" value={`${selectedDivStyle.left}`}></Input>
-                <Input type="number" placeholder="top" name="top" value={`${selectedDivStyle.top}`}></Input>
+                <Input label="W" type="number" placeholder="width" name="width" value={parseInt(selectedDivStyle.width.replace('px', ''))}></Input>
+                <Input label="H" type="number" placeholder="height" name="height" value={parseInt(selectedDivStyle.height.replace('px', ''))}></Input>
+                <Input label="X" type="number" placeholder="left" name="left" value={parseInt(selectedDivStyle.left.replace('px', ''))}></Input>
+                <Input label="Y" type="number" placeholder="top" name="top" value={parseInt(selectedDivStyle.top.replace('px', ''))}></Input>
+                {/* <Input label="C" type="color" placeholder="top" name="top" value={parseInt(selectedDivStyle.replace('px', ''))}></Input> */}
             </form>
         </div>
     )

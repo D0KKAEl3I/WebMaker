@@ -1,5 +1,5 @@
 import Button from 'components/Button'
-import InputWithLabel from 'components/Input'
+import InputWithLabel from 'components/InputWithLabel'
 import styles from './topmenu.module.css'
 export default function Topmenu({ con }) {
     function undo() {
@@ -11,13 +11,13 @@ export default function Topmenu({ con }) {
     function save() {
         console.log('save')
     }
-    function top(){
+    function top() {
         console.log('top')
     }
-    function vertical(){
+    function vertical() {
         console.log('vertocal')
     }
-    function bottom(){
+    function bottom() {
         console.log('bottom')
     }
     return (
@@ -33,10 +33,10 @@ export default function Topmenu({ con }) {
                 }}
                 onClick={save}
             ><img src='/img/done.png'></img></Button>
-            <Button title={'위로정렬'} onClick={top}><img src ='/img/top.webp'></img></Button>
-            <Button title={'가운데정렬'} onClick={vertical}><img src ='/img/vertical.webp'></img></Button>
-            <Button title={'아래로정렬'} onClick={bottom}><img src ='/img/bottom.webp'></img></Button>
+            <Button title={'위로정렬'} onClick={top}><img src='/img/top.webp'></img></Button>
+            <Button title={'가운데정렬'} onClick={vertical}><img src='/img/vertical.webp'></img></Button>
+            <Button title={'아래로정렬'} onClick={bottom}><img src='/img/bottom.webp'></img></Button>
 
-        </div> 
+        </div>
     )
 }
