@@ -4,7 +4,6 @@ import styles from './shape.module.css'
 
 
 export default function Shape({ style, ...params }) {
-
     const [divStyle, setDivStyle] = useState(style)
 
     useEffect(() => {
@@ -19,7 +18,7 @@ export default function Shape({ style, ...params }) {
     const [dragInfo, setDragInfo] = useState({
         isDragging: false,
         origin: { x: 0, y: 0 },
-        lastTranslation: { x: 0, y: 0 },
+        lastTranslation: { x: parseInt(divStyle.left.replace('px', '')), y: parseInt(divStyle.top.replace('px', '')) },
     })
 
     const handleMouseDown = ({ clientX, clientY }) => {
@@ -41,7 +40,7 @@ export default function Shape({ style, ...params }) {
         }
     }
 
-    const handleMouseUp = () => {
+    const handleMouseUp = (e) => {
         if (dragInfo.isDragging) {
             const { left, top } = divStyle
             setDragInfo({
@@ -70,7 +69,6 @@ export default function Shape({ style, ...params }) {
     return (
         <div
             style={divStyle}
-            onDoubleClick={() => params.select(params, divStyle)}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseMove}

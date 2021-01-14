@@ -1,4 +1,4 @@
-import Button from 'components/Button'
+import Button from './Button'
 import InputWithLabel from 'components/InputWithLabel'
 import styles from './topmenu.module.css'
 export default function Topmenu({ con }) {

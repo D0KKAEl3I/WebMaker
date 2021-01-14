@@ -1,9 +1,9 @@
 import styles from './pallete.module.css'
 
-export default function Pallete({ children, style }) {
+export default function Pallete({ children, style, onClick }) {
     return (
-        <div className={styles.outline} style={style}>
-            <div className={styles.pallete}>
+        <div onClick={onClick} className={styles.outline} style={style}>
+            <div onClick={onClick} className={styles.pallete}>
                 {children}
             </div>
         </div>
