@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,600;1,400&display=swap');
+.container{
+height: 32px;
+}
+.label{
+    height: 100%;
+    padding : 4px;
+    font-size: 11px;
+    font-family: 'Open Sans', sans-serif;
+}
+.input{
+    height: 100%;
+    width: 40px;
+    border:0;
+    outline:0;
+    border-bottom: 1px solid gray;
+    padding: 4px;
+}
+.input:focus{
+    border-bottom: 2px solid rgb(46, 46, 218);
+    transition: 0.4s;
+    
+}

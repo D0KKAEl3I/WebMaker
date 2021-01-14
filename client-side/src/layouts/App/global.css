@@ -10,6 +10,6 @@ img {
 }
 
 html {
-    /* overflow: hidden; */
+    overflow: hidden;
     background-color: rgb(238, 230, 230) ;
 }
