@@ -29,7 +29,6 @@ export default function Shape({ style, ...params }) {
     }
     const handleMouseMove = ({ clientX, clientY }) => {
         if (dragInfo.isDragging) {
-            console.log(dragInfo)
             const { origin, lastTranslation } = dragInfo
             setDivStyle({
                 ...divStyle,

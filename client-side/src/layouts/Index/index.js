@@ -10,10 +10,20 @@ import Topmenu from 'components/Topmenu'
 export default function Index() {
 
     const [divs, setDivs] = useState([]);
+    const [lastDivs, setLastDivs] = useState([])
+
+    useEffect(() => {
+        console.log(lastDivs)
+    }, [lastDivs])
+
+    const addLastDivs = (item) => {
+        setLastDivs(arr => [...arr, item])
+    }
 
     const [selectedDivStyle, setSelectedDivStyle] = useState({ elementInfo: null, style: null })
 
     const changeStyle = (e) => {
+        addLastDivs(Array.from(divs))
         if (selectedDivStyle.elementInfo && selectedDivStyle.style) {
             const { width, height, left, top, rotate } = e.target.form
             let style = { ...selectedDivStyle.style, width: width.value + 'px', height: height.value + 'px', left: left.value + 'px', top: top.value + 'px', transform: `rotate(${rotate.value}deg)` }
@@ -37,6 +47,8 @@ export default function Index() {
     }
 
     const select = (elementInfo, style) => {
+        console.log(divs)
+        addLastDivs([...divs])
         setSelectedDivStyle({ elementInfo: elementInfo, style: style })
         setDivs(arr => {
             let { id } = elementInfo
@@ -53,15 +65,21 @@ export default function Index() {
     }
 
     const makeDiv = (type) => {
+
+        addLastDivs([...divs])
         setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, style: { width: '90px', height: '90px', left: '0px', top: '0px', backgroundColor: '#ffffff', transform: 'rotate(0deg)' }, onContextMenu: onContextMenu }])
     }
 
     const copyDiv = () => {
+
+        addLastDivs([...divs])
         if (!selectedDivStyle.elementInfo) { alert('복사할 대상을 선택해 주세요.'); return }
         setDivs(arr => [...arr, { ...selectedDivStyle.elementInfo, id: arr.length, style: selectedDivStyle.style }])
     }
 
     const deleteDiv = () => {
+
+        addLastDivs([...divs])
         if (!selectedDivStyle.elementInfo) { alert('삭제할 대상을 선택해 주세요.'); return }
         setDivs(arr => {
             let index = selectedDivStyle.elementInfo.id;
@@ -75,6 +93,12 @@ export default function Index() {
         setSelectedDivStyle({ elementInfo: null, style: null })
     }
 
+    const undo = () => {
+        if (lastDivs.length == 0) return
+        setDivs([...lastDivs][lastDivs.length - 1])
+        lastDivs.pop()
+    }
+
 
     return (
         <div onClick={(e) => { setContextMenu({ display: 'none' }); if (e.currentTarget === e.target) setSelectedDivStyle({ elementInfo: null, style: null }) }} >
@@ -83,10 +107,10 @@ export default function Index() {
                     divs.map(i => <Shape id={i.id} className={i.className} type={i.type} style={i.style} select={i.select} onContextMenu={e => onContextMenu(e)} />)
                 }
             </Pallete>
-            <Topmenu functions={{ copyDiv, deleteDiv }} />
+            <Topmenu functions={{ copyDiv, deleteDiv, undo }} />
             <ShapeMenu functions={{ makeDiv }}></ShapeMenu>
             <StyleMenu functions={{ changeStyle, changeColor }} selectedDivStyle={selectedDivStyle.style ? selectedDivStyle.style : { width: '', height: '', left: '', top: '', transform: '' }}></StyleMenu>
-            <ContextMenu functions={{ copyDiv, deleteDiv }} style={contextMenu} />
+            <ContextMenu functions={{ copyDiv, deleteDiv, undo }} style={contextMenu} />
         </div >
     )
 }
