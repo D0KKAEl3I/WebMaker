@@ -21,11 +21,20 @@
     border-radius: 50%;
 }
 
-.capsule {
-    margin: 0 20px;
-    width: 50px;
-    height: 90px;
-    border-radius: 99999px;
+.text {
+    width: auto;
+    height: auto;
+    border: none;
+    min-width: 20px;
+    min-height: 30px;
+    position: absolute;
+    transform-origin: left top;
+    border: 1px solid rgba(0, 0, 0, 0.157);
+    box-sizing: border-box;
+    outline: none;
+}
+.text:focus{
+    border: var(--border);
 }
 
 .select {

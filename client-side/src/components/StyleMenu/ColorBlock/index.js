@@ -1,13 +1,13 @@
-export default function ColorBlock({color, onClick}){
-    return(
+export default function ColorBlock({ color, onClick }) {
+    return (
         <div onClick={onClick} style={{
-            backgroundColor:color, 
-            width:25+"px", 
-            height:25+"px",
-            display:"inline-block",
-            borderRadius:8+"px",
-            margin:4+"px"
-            
+            backgroundColor: color,
+            width: 20 + "px",
+            height: 20 + "px",
+            display: "inline-block",
+            // borderRadius:8+"px",
+            // border: 'var(--border)'
+
         }}></div>
     )
 }

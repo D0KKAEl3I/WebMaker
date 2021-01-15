@@ -64,6 +64,20 @@ export default function Shape({ style, ...params }) {
         }
     }
 
+    if (params.type == 'text') {
+        return (
+            <input
+                style={divStyle}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onContextMenu={params.onContextMenu}
+                className={`${styles.text} ${params.className} ${dragInfo.isDragging ? styles.select : ''}`}>
+            </input>
+        )
+    }
+
     return (
         <div
             key={params.id}

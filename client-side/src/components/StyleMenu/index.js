@@ -1,8 +1,24 @@
 import Input from 'components/InputWithLabel'
 import styles from './stylemenu.module.css'
 import ColorBlock from './ColorBlock'
+import { useState } from 'react'
 
 export default function StyleMenu({ functions, selectedDivStyle }) {
+    const [colors, setColors] = useState([
+        '#ff0000'
+        , '#ffff00'
+        , '#00ff00'
+        , '#00ffff'
+        , '#0000ff'
+        , '#ff00ff'
+        , '#ffffff'
+        , '#000000'
+    ])
+
+    const addColor = (newColor) => {
+        setColors([...colors, newColor])
+    }
+
     return (
         <div className={styles.container}>
             <form onChange={functions.changeStyle}>
@@ -13,14 +29,10 @@ export default function StyleMenu({ functions, selectedDivStyle }) {
                 <Input label="R" type="number" placeholder="rotate" name="rotate" value={selectedDivStyle.transform ? parseInt(selectedDivStyle.transform.replace('rotate(', '').replace('deg)', '')) % 360 : ''}></Input>
             </form>
             <div>
-                <ColorBlock color='#ff0000' onClick={(e) => functions.changeColor('#ff0000')} />
-                <ColorBlock color='#ffff00' onClick={(e) => functions.changeColor('#ffff00')} />
-                <ColorBlock color='#00ff00' onClick={(e) => functions.changeColor('#00ff00')} />
-                <ColorBlock color='#00ffff' onClick={(e) => functions.changeColor('#00ffff')} />
-                <ColorBlock color='#0000ff' onClick={(e) => functions.changeColor('#0000ff')} />
-                <ColorBlock color='#ff00ff' onClick={(e) => functions.changeColor('#ff00ff')} />
-                <ColorBlock color='#ffffff' onClick={(e) => functions.changeColor('#ffffff')} />
-                <ColorBlock color='#000000' onClick={(e) => functions.changeColor('#000000')} />
+                <input type="color" onChange={(e) => { functions.changeColor(e.target.value) }} value={selectedDivStyle.backgroundColor ? selectedDivStyle.backgroundColor : '#ffffff'}></input>
+                {
+                    colors.map(i => <ColorBlock color={i} onClick={() => functions.changeColor(i)}></ColorBlock>)
+                }
             </div>
         </div>
     )

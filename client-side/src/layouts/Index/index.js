@@ -12,10 +12,6 @@ export default function Index() {
     const [divs, setDivs] = useState([]);
     const [lastDivs, setLastDivs] = useState([])
 
-    useEffect(() => {
-        console.log(lastDivs)
-    }, [lastDivs])
-
     const addLastDivs = (item) => {
         setLastDivs(arr => [...arr, item])
     }
@@ -41,16 +37,16 @@ export default function Index() {
         setSelectedDivStyle({ ...selectedDivStyle, style: { ...selectedDivStyle.style, backgroundColor: color } })
         setDivs(arr => {
             let { id } = selectedDivStyle.elementInfo
-            arr[id] = { ...arr[id], style: selectedDivStyle.style };
+            arr[id] = { ...arr[id], style: { ...arr[id].style, backgroundColor: color } };
             return arr;
         })
     }
 
     const select = (elementInfo, style) => {
-        console.log(divs)
-        addLastDivs([...divs])
+
         setSelectedDivStyle({ elementInfo: elementInfo, style: style })
         setDivs(arr => {
+            addLastDivs([...arr])
             let { id } = elementInfo
             arr[id] = { ...arr[id], style: style };
             return arr;
@@ -65,7 +61,10 @@ export default function Index() {
     }
 
     const makeDiv = (type) => {
-
+        if (type == 'text') {
+            setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, style: { width: null, height: null, left: '0px', top: '0px', backgroundColor: 'transparent', transform: 'rotate(0deg)' }, onContextMenu: onContextMenu }])
+            return
+        }
         addLastDivs([...divs])
         setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, style: { width: '90px', height: '90px', left: '0px', top: '0px', backgroundColor: '#ffffff', transform: 'rotate(0deg)' }, onContextMenu: onContextMenu }])
     }
@@ -109,7 +108,7 @@ export default function Index() {
             </Pallete>
             <Topmenu functions={{ copyDiv, deleteDiv, undo }} />
             <ShapeMenu functions={{ makeDiv }}></ShapeMenu>
-            <StyleMenu functions={{ changeStyle, changeColor }} selectedDivStyle={selectedDivStyle.style ? selectedDivStyle.style : { width: '', height: '', left: '', top: '', transform: '' }}></StyleMenu>
+            <StyleMenu functions={{ changeStyle, changeColor }} selectedDivStyle={selectedDivStyle.style ? selectedDivStyle.style : { width: '', height: '', left: '', top: '', transform: '', backgroundColor: '' }}></StyleMenu>
             <ContextMenu functions={{ copyDiv, deleteDiv, undo }} style={contextMenu} />
         </div >
     )
