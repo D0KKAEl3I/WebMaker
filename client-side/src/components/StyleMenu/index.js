@@ -3,7 +3,7 @@ import styles from './stylemenu.module.css'
 import ColorBlock from './ColorBlock'
 import { useState } from 'react'
 
-export default function StyleMenu({ functions, selectedDivStyle }) {
+export default function StyleMenu({ functions, selectedDivStyle, className }) {
     const [colors, setColors] = useState([
         '#ff0000'
         , '#ffff00'
@@ -20,7 +20,7 @@ export default function StyleMenu({ functions, selectedDivStyle }) {
     }
 
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} ${className}`}>
             <form onChange={functions.changeStyle}>
                 <Input label="W" type="number" placeholder="width" name="width" value={selectedDivStyle.width ? parseInt(selectedDivStyle.width.replace('px', '')) : ''}></Input>
                 <Input label="H" type="number" placeholder="height" name="height" value={selectedDivStyle.height ? parseInt(selectedDivStyle.height.replace('px', '')) : ''}></Input>

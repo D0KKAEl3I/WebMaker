@@ -1,18 +1,14 @@
-.button{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
 .container {
     display: inline;
     position: relative;
 }
 
 .button {
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
+    margin-top: 5px;
     border: none;
-    margin: 5px;
+    margin-left: 15px;
     position: relative;
     background-color: transparent;
     outline: none;
@@ -21,10 +17,10 @@
 .button::after {
     content: '';
     position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+    width:80%;
+    height:80%;
+    top: 10%;
+    left: 10%;
     border-radius: 50%;
     background-color: gray;
     transform: scale(0);
@@ -38,33 +34,28 @@
 
 .button:hover::after {
     transform: scale(1);
-    transition: .3s;
+    transition: 0.2s;
 }
 .button:hover{
-    background-color: rgb(241, 241, 241);
     transform: scale(1.1);
-    transition: 0.3s;
+    transition: 0.2s;
 }
 .button>img {
-    width: 80%;
-}
-.title{
-    border: 1px solid rgb(34, 34, 34);
-    border-width: 3px;
+    width: 70%;
 }
 .title {
     position: absolute;
+    width: 100%;
     left: 50%;
     transform: translateX(-50%);
-    top: 100%;
     padding: 4px;
     background-color: rgb(34, 34, 34);
     color: white;
-    font-size: 10px;
     font-size: 8px;
     border-radius: 10%;
     display: none;
+    text-align: center;
 }
-.button:hover+.title {
-    display: inline;
+.button:hover>.title {
+    display: block;
 } 

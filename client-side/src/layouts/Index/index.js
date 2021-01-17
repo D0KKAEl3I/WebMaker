@@ -76,7 +76,7 @@ export default function Index() {
     const makeDiv = (type) => {
         setNextAction([])
         if (type == 'text') {
-            setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, style: { width: null, height: null, left: '0px', top: '0px', backgroundColor: 'transparent', transform: 'rotate(0deg)' }, onContextMenu: onContextMenu }])
+            setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, style: { width: '100px', height: '40px', left: '0px', top: '0px', backgroundColor: 'transparent', transform: 'rotate(0deg)' }, onContextMenu: onContextMenu }])
             return
         }
         addPreviousAction([...divs])
@@ -123,14 +123,14 @@ export default function Index() {
 
     return (
         <div onClick={(e) => { setContextMenu({ display: 'none' }); if (e.currentTarget === e.target) setSelectedDivStyle({ elementInfo: null, style: null }) }} >
-            <Pallete style={{ marginLeft: '65px' }} onClick={(e) => { if (e.currentTarget === e.target) setSelectedDivStyle({ elementInfo: null, style: null }) }}>
+            <Pallete className={styles.pallete} style={{ marginLeft: '65px' }} onClick={(e) => { if (e.currentTarget === e.target) setSelectedDivStyle({ elementInfo: null, style: null }) }}>
                 {
                     divs.map(i => <Shape id={i.id} className={i.className} type={i.type} style={i.style} select={i.select} onContextMenu={e => onContextMenu(e)} />)
                 }
             </Pallete>
-            <Topmenu functions={{ copyDiv, deleteDiv, undo, redo }} />
-            <ShapeMenu functions={{ makeDiv }}></ShapeMenu>
-            <StyleMenu functions={{ changeStyle, changeColor }} selectedDivStyle={selectedDivStyle.style ? selectedDivStyle.style : { width: '', height: '', left: '', top: '', transform: '', backgroundColor: '' }}></StyleMenu>
+            <Topmenu className={styles.topmenu} functions={{ copyDiv, deleteDiv, undo, redo }} />
+            <ShapeMenu className={styles.shapemenu} functions={{ makeDiv }}></ShapeMenu>
+            <StyleMenu className={styles.stylemenu} functions={{ changeStyle, changeColor }} selectedDivStyle={selectedDivStyle.style ? selectedDivStyle.style : { width: '', height: '', left: '', top: '', transform: '', backgroundColor: '' }}></StyleMenu>
             <ContextMenu functions={{ copyDiv, deleteDiv, undo, redo }} style={contextMenu} />
         </div >
     )

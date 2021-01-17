@@ -4,29 +4,16 @@
     transform-origin: left top;
 }
 
-.square {
-    width: 90px;
-    height: 90px;
-}
-
 .roundsquare {
-    width: 90px;
-    height: 90px;
     border-radius: 15px;
 }
 
 .round {
-    width: 90px;
-    height: 90px;
     border-radius: 50%;
 }
 
 .text {
-    width: auto;
-    height: auto;
     border: none;
-    min-width: 20px;
-    min-height: 30px;
     position: absolute;
     transform-origin: left top;
     border: 1px solid rgba(0, 0, 0, 0.157);

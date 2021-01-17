@@ -1,0 +1,12 @@
+.topmenu{
+    height: 60px;
+}
+.shapemenu{
+    height: calc(100%-60px);
+}
+.stylemenu{
+
+}
+.pallete{
+    transform-origin: left top;
+}

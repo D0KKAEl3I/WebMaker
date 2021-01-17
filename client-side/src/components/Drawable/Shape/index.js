@@ -88,7 +88,6 @@ export default function Shape({ style, ...params }) {
             onMouseUp={handleMouseUp}
             onContextMenu={params.onContextMenu}
             className={`${styles.div} ${setType()} ${params.className} ${dragInfo.isDragging ? styles.select : ''}`}>
-            {params.id}
         </div >
     )
 }
