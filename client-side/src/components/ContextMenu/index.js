@@ -2,10 +2,10 @@ import styles from './contextmenu.module.css'
 export default function ContextMenu({ style, functions }) {
     return (
         <div style={style} className={styles.rightonclic}>
-            <div>
+            <div onClick={functions.undo}>
                 <span>뒤로</span>
             </div>
-            <div>
+            <div onClick={functions.redo}>
                 <span>앞으로</span>
             </div>
             <div onClick={functions.copyDiv}>

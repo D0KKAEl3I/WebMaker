@@ -6,20 +6,32 @@ import StyleMenu from 'components/StyleMenu'
 import ShapeMenu from 'components/ShapeMenu'
 import ContextMenu from 'components/ContextMenu'
 import Topmenu from 'components/Topmenu'
+import next from 'next'
 
 export default function Index() {
 
     const [divs, setDivs] = useState([]);
-    const [lastDivs, setLastDivs] = useState([])
+    const [previousAction, setPreviousAction] = useState([])
+    const [nextAction, setNextAction] = useState([])
 
-    const addLastDivs = (item) => {
-        setLastDivs(arr => [...arr, item])
+    const addPreviousAction = (action) => {
+        setPreviousAction(arr => [...arr, action])
     }
+
+    const addNextAction = (action) => {
+        setNextAction(arr => [...arr, action])
+    }
+
+    useEffect(() => {
+        console.log("previous : ", [...previousAction])
+        console.log("next : ", [...nextAction])
+    }, [previousAction, nextAction])
 
     const [selectedDivStyle, setSelectedDivStyle] = useState({ elementInfo: null, style: null })
 
     const changeStyle = (e) => {
-        addLastDivs(Array.from(divs))
+        setNextAction([])
+        addPreviousAction(Array.from(divs))
         if (selectedDivStyle.elementInfo && selectedDivStyle.style) {
             const { width, height, left, top, rotate } = e.target.form
             let style = { ...selectedDivStyle.style, width: width.value + 'px', height: height.value + 'px', left: left.value + 'px', top: top.value + 'px', transform: `rotate(${rotate.value}deg)` }
@@ -33,6 +45,7 @@ export default function Index() {
     }
 
     const changeColor = async (color) => {
+        setNextAction([])
         if (!selectedDivStyle.style) return
         setSelectedDivStyle({ ...selectedDivStyle, style: { ...selectedDivStyle.style, backgroundColor: color } })
         setDivs(arr => {
@@ -43,10 +56,10 @@ export default function Index() {
     }
 
     const select = (elementInfo, style) => {
-
+        setNextAction([])
         setSelectedDivStyle({ elementInfo: elementInfo, style: style })
         setDivs(arr => {
-            addLastDivs([...arr])
+            addPreviousAction([...arr])
             let { id } = elementInfo
             arr[id] = { ...arr[id], style: style };
             return arr;
@@ -61,24 +74,25 @@ export default function Index() {
     }
 
     const makeDiv = (type) => {
+        setNextAction([])
         if (type == 'text') {
             setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, style: { width: null, height: null, left: '0px', top: '0px', backgroundColor: 'transparent', transform: 'rotate(0deg)' }, onContextMenu: onContextMenu }])
             return
         }
-        addLastDivs([...divs])
+        addPreviousAction([...divs])
         setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, style: { width: '90px', height: '90px', left: '0px', top: '0px', backgroundColor: '#ffffff', transform: 'rotate(0deg)' }, onContextMenu: onContextMenu }])
     }
 
     const copyDiv = () => {
-
-        addLastDivs([...divs])
+        setNextAction([])
+        addPreviousAction([...divs])
         if (!selectedDivStyle.elementInfo) { alert('복사할 대상을 선택해 주세요.'); return }
         setDivs(arr => [...arr, { ...selectedDivStyle.elementInfo, id: arr.length, style: selectedDivStyle.style }])
     }
 
     const deleteDiv = () => {
-
-        addLastDivs([...divs])
+        setNextAction([])
+        addPreviousAction([...divs])
         if (!selectedDivStyle.elementInfo) { alert('삭제할 대상을 선택해 주세요.'); return }
         setDivs(arr => {
             let index = selectedDivStyle.elementInfo.id;
@@ -93,9 +107,17 @@ export default function Index() {
     }
 
     const undo = () => {
-        if (lastDivs.length == 0) return
-        setDivs([...lastDivs][lastDivs.length - 1])
-        lastDivs.pop()
+        if (previousAction.length == 0) return
+        addNextAction([...divs])
+        setDivs([...previousAction][previousAction.length - 1])
+        previousAction.pop()
+    }
+
+    const redo = () => {
+        if (nextAction.length == 0) return
+        addPreviousAction([...divs])
+        setDivs([...nextAction][nextAction.length - 1])
+        nextAction.pop()
     }
 
 
@@ -106,10 +128,10 @@ export default function Index() {
                     divs.map(i => <Shape id={i.id} className={i.className} type={i.type} style={i.style} select={i.select} onContextMenu={e => onContextMenu(e)} />)
                 }
             </Pallete>
-            <Topmenu functions={{ copyDiv, deleteDiv, undo }} />
+            <Topmenu functions={{ copyDiv, deleteDiv, undo, redo }} />
             <ShapeMenu functions={{ makeDiv }}></ShapeMenu>
             <StyleMenu functions={{ changeStyle, changeColor }} selectedDivStyle={selectedDivStyle.style ? selectedDivStyle.style : { width: '', height: '', left: '', top: '', transform: '', backgroundColor: '' }}></StyleMenu>
-            <ContextMenu functions={{ copyDiv, deleteDiv, undo }} style={contextMenu} />
+            <ContextMenu functions={{ copyDiv, deleteDiv, undo, redo }} style={contextMenu} />
         </div >
     )
 }
