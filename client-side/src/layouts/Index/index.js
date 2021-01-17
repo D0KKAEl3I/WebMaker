@@ -9,7 +9,6 @@ import Topmenu from 'components/Topmenu'
 import axios from 'axios'
 
 export default function Index() {
-    const userData = axios.get('/')
 
     const [divs, setDivs] = useState([]);
     const [previousAction, setPreviousAction] = useState([])
@@ -23,10 +22,11 @@ export default function Index() {
         setNextAction(arr => [...arr, action])
     }
 
-    // useEffect(() => {
-    //     console.log("previous : ", [...previousAction])
-    //     console.log("next : ", [...nextAction])
-    // }, [previousAction, nextAction])
+    useEffect(() => {
+        axios.get('http://localhost:8090/').then(r => {
+            setDivs(r.data)
+        })
+    }, [])
 
     const [selectedDivStyle, setSelectedDivStyle] = useState({ elementInfo: null, style: null })
 
@@ -121,17 +121,21 @@ export default function Index() {
     }
 
     const save = () => {
-        axios.get(`/lookupWeb/${userId}`)
+        axios.post('http://localhost:8090/web', { data: [...divs] }).then(r => {
+            alert('저장 성공')
+        }).catch(e => {
+            alert('저장 실패')
+        })
     }
 
     return (
         <div onClick={(e) => { setContextMenu({ display: 'none' }); if (e.currentTarget === e.target) setSelectedDivStyle({ elementInfo: null, style: null }) }} >
             <Pallete className={styles.pallete} style={{ marginLeft: '65px' }} onClick={(e) => { if (e.currentTarget === e.target) setSelectedDivStyle({ elementInfo: null, style: null }) }}>
                 {
-                    divs.map(i => <Shape id={i.id} className={i.className} type={i.type} innerText={i.innerText ? i.innerText : ''} style={i.style} select={i.select} onContextMenu={e => onContextMenu(e)} />)
+                    divs.map(i => <Shape id={i.id} className={i.className} type={i.type} innerText={i.innerText ? i.innerText : ''} style={i.style} select={select} onContextMenu={e => onContextMenu(e)} />)
                 }
             </Pallete>
-            <Topmenu className={styles.topmenu} functions={{ copyDiv, deleteDiv, undo, redo }} />
+            <Topmenu className={styles.topmenu} functions={{ copyDiv, deleteDiv, undo, redo, save }} />
             <ShapeMenu className={styles.shapemenu} functions={{ makeDiv }}></ShapeMenu>
             <StyleMenu className={styles.stylemenu} functions={{ changeStyle, changeColor }} selectedDivStyle={selectedDivStyle.style ? selectedDivStyle.style : { width: '', height: '', left: '', top: '', transform: '', backgroundColor: '' }}></StyleMenu>
             <ContextMenu functions={{ copyDiv, deleteDiv, undo, redo }} style={contextMenu} />
