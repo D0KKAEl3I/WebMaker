@@ -6,7 +6,6 @@ import StyleMenu from 'components/StyleMenu'
 import ShapeMenu from 'components/ShapeMenu'
 import ContextMenu from 'components/ContextMenu'
 import Topmenu from 'components/Topmenu'
-import next from 'next'
 
 export default function Index() {
 
@@ -22,10 +21,10 @@ export default function Index() {
         setNextAction(arr => [...arr, action])
     }
 
-    useEffect(() => {
-        console.log("previous : ", [...previousAction])
-        console.log("next : ", [...nextAction])
-    }, [previousAction, nextAction])
+    // useEffect(() => {
+    //     console.log("previous : ", [...previousAction])
+    //     console.log("next : ", [...nextAction])
+    // }, [previousAction, nextAction])
 
     const [selectedDivStyle, setSelectedDivStyle] = useState({ elementInfo: null, style: null })
 
@@ -60,8 +59,8 @@ export default function Index() {
         setSelectedDivStyle({ elementInfo: elementInfo, style: style })
         setDivs(arr => {
             addPreviousAction([...arr])
-            let { id } = elementInfo
-            arr[id] = { ...arr[id], style: style };
+            let { id, innerText } = elementInfo
+            arr[id] = { ...arr[id], innerText: innerText, style: style };
             return arr;
         })
     }
@@ -76,8 +75,8 @@ export default function Index() {
     const makeDiv = (type) => {
         setNextAction([])
         if (type == 'text') {
-            setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, style: { width: '100px', height: '40px', left: '0px', top: '0px', backgroundColor: 'transparent', transform: 'rotate(0deg)' }, onContextMenu: onContextMenu }])
-            return
+            setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, innerText: 'text', onContextMenu: onContextMenu, style: { width: '100px', height: '40px', left: '0px', top: '0px', backgroundColor: 'transparent', transform: 'rotate(0deg)' } }])
+            return;
         }
         addPreviousAction([...divs])
         setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, style: { width: '90px', height: '90px', left: '0px', top: '0px', backgroundColor: '#ffffff', transform: 'rotate(0deg)' }, onContextMenu: onContextMenu }])
@@ -97,7 +96,6 @@ export default function Index() {
         setDivs(arr => {
             let index = selectedDivStyle.elementInfo.id;
             arr.splice(index, 1);
-            console.log(arr)
             for (let i = index; i < arr.length; i++) {
                 arr[i] = { ...arr[i], id: i }
             }
@@ -120,12 +118,15 @@ export default function Index() {
         nextAction.pop()
     }
 
+    const save = () => {
+
+    }
 
     return (
         <div onClick={(e) => { setContextMenu({ display: 'none' }); if (e.currentTarget === e.target) setSelectedDivStyle({ elementInfo: null, style: null }) }} >
             <Pallete className={styles.pallete} style={{ marginLeft: '65px' }} onClick={(e) => { if (e.currentTarget === e.target) setSelectedDivStyle({ elementInfo: null, style: null }) }}>
                 {
-                    divs.map(i => <Shape id={i.id} className={i.className} type={i.type} style={i.style} select={i.select} onContextMenu={e => onContextMenu(e)} />)
+                    divs.map(i => <Shape id={i.id} className={i.className} type={i.type} innerText={i.innerText ? i.innerText : ''} style={i.style} select={i.select} onContextMenu={e => onContextMenu(e)} />)
                 }
             </Pallete>
             <Topmenu className={styles.topmenu} functions={{ copyDiv, deleteDiv, undo, redo }} />

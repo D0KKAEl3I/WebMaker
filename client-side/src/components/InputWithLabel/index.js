@@ -1,9 +1,9 @@
 import styles from './inputwithlabel.module.css'
-export default function InputWithLabel({ type, label, name, value, placholder, readOnly }) {
+export default function InputWithLabel({ type, label, name, value, placholder }) {
     return (
         <div>
             <span className={styles.label}>{label}</span>
-            <input readOnly={value == ''} className={styles.input} name={name} value={value} placeholder={placholder} type={type}></input>
+            <input readOnly={value === ''} className={styles.input} name={name} value={value} placeholder={placholder} type={type}></input>
         </div>
     )
 }

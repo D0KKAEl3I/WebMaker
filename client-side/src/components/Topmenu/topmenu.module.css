@@ -1,0 +1,4 @@
+.container{
+    border-bottom: var(--border);
+    z-index: 5;
+}

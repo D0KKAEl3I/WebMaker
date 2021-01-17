@@ -1,7 +1,10 @@
  @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&display=swap');
 .rightmenu2{
     width: 65px;
-    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 60px;
+    bottom: 0;
     background-color: wheat;
     border-right: var(--border) ;  
     display: flex;
