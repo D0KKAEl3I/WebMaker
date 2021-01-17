@@ -14,6 +14,13 @@ app.use(cors())
 app.use('/', router)
 app.use('/auth', authRouter)
 
+const mongoose = require('mongoose')
+mongoose.Promise = global.Promise
+mongoose.set('useCreateIndex', true)
+mongoose.connect(config.database.url, { useUnifiedTopology: true, useNewUrlParser: true }, () => {
+    console.info(`[INFO] MONGODB CONNECTED`)
+})
+
 app.listen(config.server.port, () => {
-    console.info(`[info] Server on ${config.server.port}port`)
+    console.info(`[INFO] SERVER RUNNING ON ${config.server.port}PORT`)
 })

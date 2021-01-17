@@ -6,8 +6,10 @@ import StyleMenu from 'components/StyleMenu'
 import ShapeMenu from 'components/ShapeMenu'
 import ContextMenu from 'components/ContextMenu'
 import Topmenu from 'components/Topmenu'
+import axios from 'axios'
 
 export default function Index() {
+    const userData = axios.get('/')
 
     const [divs, setDivs] = useState([]);
     const [previousAction, setPreviousAction] = useState([])
@@ -119,7 +121,7 @@ export default function Index() {
     }
 
     const save = () => {
-
+        axios.get(`/lookupWeb/${userId}`)
     }
 
     return (
