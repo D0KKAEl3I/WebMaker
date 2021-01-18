@@ -1,15 +1,16 @@
 const router = require('express').Router();
 const { Router } = require('express')
 
+const webController = require('../controllers/webController')
+
 let divs = []
 
-router.get('/', (req, res, next) => {
-    res.send(divs)
-})
+router.get('/web/:title', webController.readWeb)
 
-router.post('/web', (req, res, next) => {
-    divs = req.body.data
-    res.send()
-})
+router.post('/createWeb', webController.createWeb)
+
+router.post('/updateWeb/:title', webController.updateWeb)
+
+router.post('/deleteWeb/:title', webController.deleteWeb)
 
 module.exports = router

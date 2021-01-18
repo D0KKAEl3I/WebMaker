@@ -28,7 +28,6 @@ export default function Index() {
         })
     }, [])
 
-
     const [selectedDivStyle, setSelectedDivStyle] = useState({ elementInfo: null, style: null })
 
     const changeStyle = (e) => {
@@ -77,12 +76,16 @@ export default function Index() {
 
     const makeDiv = (type) => {
         setNextAction([])
-        if (type == 'text') {
-            setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, innerText: 'text', onContextMenu: onContextMenu, style: { width: '100px', height: '40px', left: '0px', top: '0px', backgroundColor: 'transparent', transform: 'rotate(0deg)' } }])
-            return;
+        if (type == 'square') {
+            setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, innerText: '', onContextMenu: onContextMenu, style: { width: '100px', height: '100px', left: '0px', top: '0px', backgroundColor: '#ffffff', transform: 'rotate(0deg)', position: 'absolute', borderRadius: 0 } }])
+        } else if (type == 'roundsquare') {
+            setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, innerText: '', onContextMenu: onContextMenu, style: { width: '100px', height: '100px', left: '0px', top: '0px', backgroundColor: '#ffffff', transform: 'rotate(0deg)', position: 'absolute', borderRadius: '8px' } }])
+        } else if (type == 'round') {
+            setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, innerText: '', onContextMenu: onContextMenu, style: { width: '100px', height: '100px', left: '0px', top: '0px', backgroundColor: '#ffffff', transform: 'rotate(0deg)', position: 'absolute', borderRadius: '50%' } }])
+        } else if (type == 'text') {
+            setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, innerText: 'text', onContextMenu: onContextMenu, style: { width: '100px', height: '40px', left: '0px', top: '0px', backgroundColor: 'transparent', transform: 'rotate(0deg)', position: 'absolute' } }])
         }
         addPreviousAction([...divs])
-        setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, style: { width: '90px', height: '90px', left: '0px', top: '0px', backgroundColor: '#ffffff', transform: 'rotate(0deg)' }, onContextMenu: onContextMenu }])
     }
 
     const copyDiv = () => {
@@ -132,14 +135,35 @@ export default function Index() {
 
     }
 
+    const [download, setDownload] = useState({ filename: "index.html", href: null })
+
+    const savefile = () => {
+        let r = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+        </head>
+        <body>
+            ${document.getElementById('web').outerHTML}
+        </body>
+        </html>
+        `
+        let filename = "index.html";
+        let blob = new Blob([r], { type: 'text/plain' });
+        setDownload({ filename: filename, href: window.URL.createObjectURL(blob) })
+    }
+
     return (
         <div onClick={(e) => { setContextMenu({ display: 'none' }); if (e.currentTarget === e.target) setSelectedDivStyle({ elementInfo: null, style: null }) }} >
             <Pallete className={styles.pallete} style={{ marginLeft: '65px' }} onClick={(e) => { if (e.currentTarget === e.target) setSelectedDivStyle({ elementInfo: null, style: null }) }}>
                 {
                     divs.map(i => <Shape id={i.id} className={i.className} type={i.type} innerText={i.innerText ? i.innerText : ''} style={i.style} select={select} onContextMenu={e => onContextMenu(e)} />)
                 }
-            </Pallete>``
-            <Topmenu className={styles.topmenu} functions={{ copyDiv, deleteDiv, undo, redo, save }} />
+            </Pallete>
+            <Topmenu className={styles.topmenu} download={{ ...download }} functions={{ copyDiv, deleteDiv, undo, redo, save, savefile }} />
             <ShapeMenu className={styles.shapemenu} functions={{ makeDiv }}></ShapeMenu>
             <StyleMenu className={styles.stylemenu} functions={{ changeStyle, changeColor }} selectedDivStyle={selectedDivStyle.style ? selectedDivStyle.style : { width: '', height: '', left: '', top: '', transform: '', backgroundColor: '' }}></StyleMenu>
             <ContextMenu functions={{ copyDiv, deleteDiv, undo, redo }} style={contextMenu} />
