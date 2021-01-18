@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+const { Schema, model } = require('mongoose')
 
 const webSchema = new Schema({
     title: { type: String, required: true },
@@ -15,5 +15,5 @@ const userSchema = new Schema({
     made_webs: [webSchema]
 }, { timestamps: true })
 
-export const userModel = model('user', userSchema)
-export const webModel = model('web', webSchema)
+exports.userModel = model('user', userSchema)
+exports.webModel = model('web', webSchema)

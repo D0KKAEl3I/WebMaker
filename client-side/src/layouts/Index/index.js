@@ -28,6 +28,7 @@ export default function Index() {
         })
     }, [])
 
+
     const [selectedDivStyle, setSelectedDivStyle] = useState({ elementInfo: null, style: null })
 
     const changeStyle = (e) => {

@@ -1,13 +1,21 @@
+const { userModel, webModel } = require('../models/users')
+
+
+const crypto = require('crypto')
+const { v4: uuidv4 } = require('uuid')
+
 exports.signin = async (req, res, next) => {
     userModel.findOne({ id: req.body.id }).then(r => {
         if (r) {
+            console.log(req.session)
             if (r.hash_password == crypto.pbkdf2Sync(req.body.password, r.salt, 10000, 64, 'sha512').toString('hex')) {
-                req.session._id = r._id;
-                req.session.id = r.id;
-                req.session.username = r.username;
-                req.session.first_name = r.first_name;
-                req.session.last_name = r.last_name;
-                res.json(req.session);
+                // req.session._id = r._id;
+                // req.session.id = r.id;
+                // req.session.username = r.username;
+                // req.session.first_name = r.first_name;
+                // req.session.last_name = r.last_name;
+                // res.json(req.session);
+                res.send(true)
             } else {
                 res.status(401).json({ error: "비밀번호가 올바르지 않습니다" })
             }
@@ -29,7 +37,7 @@ exports.signup = async (req, res, next) => {
                 res.status(500).json(err)
             } else {
                 userModel.create({ hash_password: key.toString("hex"), salt, ...body }).then((r) => {
-                    res.json(r)
+                    res.json(r.id)
                 }).catch(e => {
                     res.status(500).json(e);
                 })
