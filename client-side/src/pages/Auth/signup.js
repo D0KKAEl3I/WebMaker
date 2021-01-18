@@ -1,2 +1,2 @@
-import SignUp from 'layouts/jisoo'
+import SignUp from 'layouts/SignUp'
 export default SignUp
