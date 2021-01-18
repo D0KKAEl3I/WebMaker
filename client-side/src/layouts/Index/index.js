@@ -128,6 +128,9 @@ export default function Index() {
             alert('저장 실패')
         })
     }
+    const login =() => {
+
+    }
 
     return (
         <div onClick={(e) => { setContextMenu({ display: 'none' }); if (e.currentTarget === e.target) setSelectedDivStyle({ elementInfo: null, style: null }) }} >
@@ -135,11 +138,12 @@ export default function Index() {
                 {
                     divs.map(i => <Shape id={i.id} className={i.className} type={i.type} innerText={i.innerText ? i.innerText : ''} style={i.style} select={select} onContextMenu={e => onContextMenu(e)} />)
                 }
-            </Pallete>
+            </Pallete>``
             <Topmenu className={styles.topmenu} functions={{ copyDiv, deleteDiv, undo, redo, save }} />
             <ShapeMenu className={styles.shapemenu} functions={{ makeDiv }}></ShapeMenu>
             <StyleMenu className={styles.stylemenu} functions={{ changeStyle, changeColor }} selectedDivStyle={selectedDivStyle.style ? selectedDivStyle.style : { width: '', height: '', left: '', top: '', transform: '', backgroundColor: '' }}></StyleMenu>
             <ContextMenu functions={{ copyDiv, deleteDiv, undo, redo }} style={contextMenu} />
+           
         </div >
     )
 }

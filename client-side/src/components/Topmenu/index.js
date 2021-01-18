@@ -18,6 +18,7 @@ export default function Topmenu({ functions, className }) {
             <Button title={'위로정렬'} ><img src='/img/top.webp'></img></Button>
             <Button title={'가운데정렬'} ><img src='/img/vertical.webp'></img></Button>
             <Button title={'아래로정렬'} ><img src='/img/bottom.webp'></img></Button>
+            <Button title={'로그인'} ><img src='/img/Login.png'></img></Button>
         </div>
     )
 }
