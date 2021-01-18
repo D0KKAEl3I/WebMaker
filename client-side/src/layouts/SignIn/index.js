@@ -15,6 +15,7 @@ export default function SignIn() {
     return (
         <div className={styles.container}>
             <form className={styles.loginbox} onSubmit={signinToServer}>
+            <img src="/img/login.png"></img>
                 <input name="id" type="text" placeholder="아이디"></input>
                 <input name="password" type="password" placeholder="비밀번호 "></input>
                 {/* <label><input type="checkbox" name="stilllogin" className={styles.checkbox}></input>아이디 저장</label> */}

@@ -3,12 +3,20 @@
     height: 100vw;
 }
 
+.loginbox>img {
+    width: 130px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
 .loginbox {
     width: 350px;
     height: 400px;
-    background-color: rgba(187, 182, 255, 0.418);
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 5px 24px rgb(172, 172, 172);
     margin: 170px auto 0 auto;
-    border-radius: 8px;
+    border-radius: 10px;
+    text-align: center;
 }
 
 .loginbox>input {
@@ -18,10 +26,13 @@
     height: 40px;
     border-radius: 3px;
     font-size: 16px;
-    margin-top: 10px;
-    margin-left: 25px;
+    margin-top: 15px;
     padding-left: 10px;
     transition: .2s;
+}
+
+.loginbox>input:nth-child(1) {
+    margin-top: 100px;
 }
 
 .loginbox>input:focus {
