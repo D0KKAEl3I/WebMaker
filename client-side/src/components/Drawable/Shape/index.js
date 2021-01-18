@@ -50,20 +50,6 @@ export default function Shape({ style, ...params }) {
         }
     }
 
-    function setType() {
-        if (params.type == "square") {
-            return styles.square;
-        } else if (params.type == "roundsquare") {
-            return styles.roundsquare;
-        } else if (params.type == "round") {
-            return styles.round;
-        } else if (params.type == "capsule") {
-            return styles.capsule;
-        } else if (params.type == "diamond") {
-            return styles.diamond;
-        }
-    }
-
     if (params.type == 'text') {
         return (
             <input
@@ -89,7 +75,7 @@ export default function Shape({ style, ...params }) {
             onMouseLeave={handleMouseMove}
             onMouseUp={handleMouseUp}
             onContextMenu={params.onContextMenu}
-            className={`${styles.div} ${setType()} ${params.className} ${dragInfo.isDragging ? styles.select : ''}`}>
+            className={`${styles.div} ${params.className} ${dragInfo.isDragging ? styles.select : ''}`}>
         </div >
     )
 }

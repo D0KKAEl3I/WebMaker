@@ -76,12 +76,16 @@ export default function Index() {
 
     const makeDiv = (type) => {
         setNextAction([])
-        if (type == 'text') {
+        if (type == 'square') {
+            setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, innerText: '', onContextMenu: onContextMenu, style: { width: '100px', height: '100px', left: '0px', top: '0px', backgroundColor: '#ffffff', transform: 'rotate(0deg)', position: 'absolute', borderRadius: 0 } }])
+        } else if (type == 'roundsquare') {
+            setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, innerText: '', onContextMenu: onContextMenu, style: { width: '100px', height: '100px', left: '0px', top: '0px', backgroundColor: '#ffffff', transform: 'rotate(0deg)', position: 'absolute', borderRadius: '8px' } }])
+        } else if (type == 'round') {
+            setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, innerText: '', onContextMenu: onContextMenu, style: { width: '100px', height: '100px', left: '0px', top: '0px', backgroundColor: '#ffffff', transform: 'rotate(0deg)', position: 'absolute', borderRadius: '50%' } }])
+        } else if (type == 'text') {
             setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, innerText: 'text', onContextMenu: onContextMenu, style: { width: '100px', height: '40px', left: '0px', top: '0px', backgroundColor: 'transparent', transform: 'rotate(0deg)', position: 'absolute' } }])
-            return;
         }
         addPreviousAction([...divs])
-        setDivs(arr => [...arr, { id: arr.length, select: select, className: '', type: type, onContextMenu: onContextMenu, style: { width: '90px', height: '90px', left: '0px', top: '0px', backgroundColor: '#ffffff', transform: 'rotate(0deg)', position: 'absolute' } }])
     }
 
     const copyDiv = () => {
