@@ -3,8 +3,6 @@ const { Router } = require('express')
 
 const webController = require('../controllers/webController')
 
-let divs = []
-
 router.get('/web/:title', webController.readWeb)
 
 router.post('/createWeb', webController.createWeb)

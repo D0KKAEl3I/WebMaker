@@ -6,14 +6,13 @@ const { v4: uuidv4 } = require('uuid')
 exports.signin = async (req, res, next) => {
     userModel.findOne({ id: req.body.id }).then(r => {
         if (r) {
-            console.log(r)
             if (r.hash_password == crypto.pbkdf2Sync(req.body.password, r.salt, 10000, 64, 'sha512').toString('hex')) {
                 req.session._id = r._id;
                 req.session.id = r.id;
                 req.session.username = r.username;
                 req.session.first_name = r.first_name;
                 req.session.last_name = r.last_name;
-                res.json(req.session);
+                res.json(true);
             } else {
                 res.status(401).json({ error: "비밀번호가 올바르지 않습니다" })
             }

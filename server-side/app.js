@@ -4,7 +4,12 @@ app.use(express.json())
 //외부 module
 const bodyParser = require('body-parser');
 const cors = require('cors')
-const { v4: uuidv4 } = require('uuid')
+const session = require('express-session')
+app.use(session({  // 2
+    secret: 'keyboard cat',  // 암호화
+    resave: false,
+    saveUninitialized: true
+}));
 
 //내부 module
 const config = require('./config/index')
