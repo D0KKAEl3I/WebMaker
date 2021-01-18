@@ -3,7 +3,7 @@ const { Router } = require('express')
 
 let divs = []
 
-router.get('/', (req, res, next) => {
+router.get('/web', (req, res, next) => {
     res.send(divs)
 })
 

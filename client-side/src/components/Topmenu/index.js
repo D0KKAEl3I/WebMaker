@@ -1,6 +1,6 @@
 import Button from './Button'
 import styles from './topmenu.module.css'
-export default function Topmenu({ functions, className }) {
+export default function Topmenu({ functions, className, download }) {
     return (
         <div style={{ position: "relative" }} className={`${className} ${styles.container}`}>
             <Button title={'뒤로가기'} onClick={functions.undo}><img src='/img/undo.png'></img></Button>
@@ -10,11 +10,19 @@ export default function Topmenu({ functions, className }) {
             <Button
                 title={'저장하기'}
                 style={{
-                    position: "absolute",
+                    float: "right",
                     right: "15px",
                 }}
                 onClick={functions.save}
             ><img src='/img/done.png'></img></Button>
+            <Button
+                title={'파일로 저장하기'}
+                style={{
+                    float: "right",
+                    right: "15px",
+                }}
+                onClick={functions.savefile}
+            ><a download={download.filename} href={download.href}><img src='/img/done.png'></img></a></Button>
             <Button title={'위로정렬'} ><img src='/img/top.webp'></img></Button>
             <Button title={'가운데정렬'} ><img src='/img/vertical.webp'></img></Button>
             <Button title={'아래로정렬'} ><img src='/img/bottom.webp'></img></Button>
